@@ -33,12 +33,15 @@ body {
 .custom_dark-btn,
 .custom_orange-btn {
   display: inline-block;
-  padding: 10px 0;
+  padding: 15px 0;
   text-align: center;
   width: 145px;
   outline: none;
   color: #ffffff;
   border: 1px solid transparent;
+  border-radius: 40px;
+  font-weight: 450;
+  
 }
 
 .custom_dark-btn {
@@ -52,12 +55,12 @@ body {
 }
 
 .custom_orange-btn {
-  background-color: #fd0505;
+  background-color: red;
 }
 
 .custom_orange-btn:hover {
-  border: 1px solid #fd0505;
-  color:#fd0505;
+  border: 1px solid red;
+  color:red;
   background-color: transparent;
 }
 
@@ -171,7 +174,7 @@ a:focus {
 .quote_btn-container a {
   display: inline-block;
   padding: 5px 15px;
-  background-color: #fd0505;
+  background-color: #ff0000;
   color: #f7f7f7;
   font-size: 14px;
   text-transform: uppercase;
