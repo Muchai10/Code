@@ -1,6 +1,5 @@
 <?php
-	include("function/session.php");
-	include("db/dbconn.php");
+include("PHP/config.php");
 	
 
 if (!isset($_SESSION['cart'])) {
