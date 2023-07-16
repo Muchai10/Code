@@ -4,13 +4,13 @@
     if(isset($_POST['upload']))
     {
        
-        $name = $_POST['Name'];
-        $price = $_POST['Price'];
-        $category = $_POST['Category_ID'];
+        $name = $_POST['p_name'];
+        $price = $_POST['p_price'];
+        $category = $_POST['category'];
        
             
-        $image = $_FILES['Image']['name'];
-        $temp = $_FILES['Image']['tmp_name'];
+        $image = $_FILES['file']['name'];
+        $temp = $_FILES['file']['tmp_name'];
     
         $location = "./Photos/";
         $lname = $location.$image;
@@ -53,7 +53,7 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Tables - Basic Tables | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>Food</title>
 
     <meta name="description" content="" />
 
