@@ -1,23 +1,18 @@
 <?php
-	include 'includes/config.php';
+	include '../PHP/config.php';
 	session_start();
 
-	if(isset($_SESSION['admin'])){
-		header('location: admin/home.php');
+	if(!isset($_SESSION['admin']) || trim($_SESSION['admin']) == ''){
+		header('location: ../index.php');
+		exit();
 	}
 
-	if(isset($_SESSION['student'])){
-		$conn = $pdo->open();
+	$conn = $pdo->open();
 
-		try{
-			$stmt = $conn->prepare("SELECT * FROM student WHERE Student_ID=:Student_ID");
-			$stmt->execute(['Student_ID'=>$_SESSION['student']]);
-			$user = $stmt->fetch();
-		}
-		catch(PDOException $e){
-			echo "There is some problem in connection: " . $e->getMessage();
-		}
+	$stmt = $conn->prepare("SELECT * FROM student WHERE Student_ID=:Student_ID");
+	$stmt->execute(['Student_ID'=>$_SESSION['admin']]);
+	$admin = $stmt->fetch();
 
-		$pdo->close();
-	}
+	$pdo->close();
+
 ?>
