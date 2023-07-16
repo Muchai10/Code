@@ -1,42 +1,3 @@
-<?php
-    include_once "PHP/config.php";
-    
-    if(isset($_POST['upload']))
-    {
-       
-        $name = $_POST['p_name'];
-        $price = $_POST['p_price'];
-        $category = $_POST['category'];
-       
-            
-        $image = $_FILES['file']['name'];
-        $temp = $_FILES['file']['tmp_name'];
-    
-        $location = "./Photos/";
-        $lname = $location.$image;
-
-        $target_dir="../Photos/";
-        $finalImage=$target_dir.$image;
-
-        move_uploaded_file($temp,$finalImage);
-
-         $insert = mysqli_query($conn,"INSERT INTO food
-         (Name,Price,Category_ID,Image) 
-         VALUES ('$name',$price,'$category','$lname')");
- 
-         if(!$insert)
-         {
-             echo mysqli_error($conn);
-         }
-         else
-         {
-             echo "Records added successfully.";
-         }
-     
-    }
-        
-?>
-
 <!DOCTYPE html>
 <html
   lang="en"
@@ -327,6 +288,10 @@
                         </div>
                         <div class="modal-body">
                         <form  enctype='multipart/form-data' onsubmit="addItems()" method="POST">
+                            <div class="form-group">
+                            <label for="id">ID:</label>
+                            <input type="number" class="form-control" id="p_id" required>
+                            </div>
                             <div class="form-group">
                             <label for="name">Name:</label>
                             <input type="text" class="form-control" id="p_name" required>
