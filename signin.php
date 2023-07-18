@@ -28,7 +28,7 @@
                         $row = mysqli_fetch_assoc($result);
                         if($passwordmd5 == $row['Password']){
                             $_SESSION['Student_ID'] = $row['Student_ID'];
-                            header("Location: index.html");
+                            header("Location: index.php");
                         }
 
                         else{

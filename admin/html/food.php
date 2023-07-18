@@ -222,7 +222,7 @@
                       <tbody>
                         <?php          
                             include_once "PHP/config.php";
-                            $sql="SELECT * from food, food_category WHERE food.Category_ID=food_category.Category_ID";
+                            $sql="SELECT * from food";
                             $result=$conn-> query($sql);
                             $count=1;
                             if ($result-> num_rows > 0){
@@ -230,11 +230,11 @@
            
                         ?>
                         <tr>
-                          <td><?=$row["ID"]?>
-                          <td><img height='100px' src='<?=$row["Image"]?>'></td>
+                          <td><?=$row["ID"]?></td>
+                          <td><img src="Photos/<?php echo $row['Image'];?>" alt="" height = "100px" width = "100px"></td>
                           <td><?=$row["Name"]?></td>
                           <td><?=$row["Price"]?></td>
-                          <td><?=$row["Category"]?></td>
+                          <td><?=$row["Category_name"]?></td>
     
                         <?php
                               $count=$count+1;
@@ -272,7 +272,7 @@
 
               <br>
               <!-- Trigger the modal with a button -->
-                <button type="button" class="btn btn-primary btn-sm btn-flat " style="height:40px" data-bs-toggle="modal" data-bs-target="#myModal">
+                <button type="button" class="btn btn-primary" style="height:40px" data-bs-toggle="modal" data-bs-target="#myModal">
                     Add Food Item
                 </button>
 
@@ -287,48 +287,59 @@
                         <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
                         </div>
                         <div class="modal-body">
-                        <form  enctype='multipart/form-data' onsubmit="addItems()" method="POST">
+                        <form  enctype='multipart/form-data' method="POST">
                             <div class="form-group">
                             <label for="id">ID:</label>
-                            <input type="number" class="form-control" id="p_id" required>
+                            <input type="number" class="form-control" name="p_id" id="p_id" required>
                             </div>
                             <div class="form-group">
                             <label for="name">Name:</label>
-                            <input type="text" class="form-control" id="p_name" required>
+                            <input type="text" class="form-control" name="p_name" id="p_name" required>
                             </div>
                             <div class="form-group">
                             <label for="price">Price:</label>
-                            <input type="number" class="form-control" id="p_price" required>
+                            <input type="number" class="form-control" name="p_price" id="p_price" required>
                             </div>
                             <!-- <div class="form-group">
                             <label for="qty">Description:</label>
                             <input type="text" class="form-control" id="p_desc" required>
                             </div> -->
-                            <br>
                             <div class="form-group">
-                            <label>Category:</label>
-                            <select id="category" >
+                            <label for="category">Category:</label>
+                            <input type="text" class="form-control" name="category" id="category" required> 
+                            <!-- <select id="category" name="Category_name" >
                                 <option disabled selected>Select category</option>
+                                    <option value="breakfast">Breakfast</option>
+                                    <option value="drinks">Drinks</option>
+                                    <option value="lunchandsupper">Lunch and Supper</option>
+                                    <option value="fruits">Fruits</option>
+                                    <option value="fruits">Special Offers</option>
+                                    <option value="fruits">Tins and Cups</option>
+                            </select>    -->
+
                                 <?php
 
-                                $sql="SELECT * from food_category";
-                                $result = $conn-> query($sql);
+                                // $sql="SELECT * from food_category";
+                                // $result = $conn-> query($sql);
 
-                                if ($result-> num_rows > 0){
-                                    while($row = $result-> fetch_assoc()){
-                                    echo"<option value='".$row['Category_ID']."'>".$row['Category_name'] ."</option>";
-                                    }
-                                }
+                                // if ($result-> num_rows > 0){
+                                //     while($row = $result-> fetch_assoc()){
+                                //     echo"<option value='".$row['Category_name']."'>".$row['Category_name'] ."</option>";
+                                //     }
+                                // }
                                 ?>
-                            </select>
+
+                           
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="file">Choose Image:</label>
-                                <input type="file" class="form-control-file" id="file">
+                                <input type="file" class="form-control-file" name="image" id="image">
                             </div>
+                            <br>
                             <div class="form-group">
-                            <button type="submit" class="btn btn btn-primary btn-sm btn-flat" id="upload" style="height:40px">Add Item</button>
+                            <input type="submit" class="btn btn btn-primary" name="add" id="add" value="Add Item">
+                            <!-- <button type="submit" class="btn btn btn-primary" name="upload" id="upload" style="height:40px">Add Item</button> -->
                             </div>
                         </form>
 
@@ -340,6 +351,87 @@
                     
                     </div>
                 </div>
+
+                <?php
+                    include_once "PHP/config.php";
+                    
+                    
+                    if(isset($_POST['add']))
+                    {
+                        $id = mysqli_real_escape_string($conn,$_POST['p_id']);
+                        $name = mysqli_real_escape_string($conn,$_POST['p_name']);
+                        $price = mysqli_real_escape_string($conn,$_POST['p_price']);
+                        $category = mysqli_real_escape_string($conn,$_POST['category']);
+                        
+                        
+                        // $image = mysqli_real_escape_string($conn,$_FILES['file']['name']);
+                        // $temp = mysqli_real_escape_string($conn,$_FILES['file']['tmp_name']);
+                           
+                            $image_name = $_FILES["image"] ["name"];
+                            $image_type = $_FILES["image"] ["type"];
+                            $image_size = $_FILES["image"] ["size"];
+                            $image_temp = $_FILES["image"] ["tmp_name"];
+                            $image_error = $_FILES["image"] ["error"];
+                                
+                            if ($image_error > 0){
+                              die("Error uploading file! Code $image_error.");}
+                            else
+                            {
+                              if($image_size > 30000000000) //conditions for the file
+                              {
+                                die("Format is not allowed or file size is too big!");
+                              }
+                              else
+                              {
+                                move_uploaded_file($image_temp,"../Photos/".$image_name);
+                              }
+
+                        // $location = "./Photos/";
+                        // $lname = $location.$image;
+
+                        //$target_dir="../Photos/";
+                        // $finalImage=$target_dir.$image;
+
+                        // move_uploaded_file($temp,$finalImage);
+                        
+                        
+                      //   $errors= array();
+                      //   if(   
+                      //   empty($errors)==true){
+                      //     move_uploaded_file($temp,"../Photos/" .$image);
+                      //     echo "Success";
+                      //   }else{
+                      //     print_r($errors);
+                      //  }
+                        
+                        // $conn = mysqli_connect('localhost', 'administrator', 'test1234', 'cafeteria');
+
+                        // if(!$conn){
+                        //     echo 'Connection error: ' . mysqli_connect_error();
+                        // }
+
+                        
+
+                        $insert = mysqli_query($conn,"INSERT INTO food
+                        (ID,Image,Name,Price,Category_name) 
+                        VALUES ('$id','$image_name','$name','$price','$category')");
+                
+                        if(!$insert)
+                        {
+                          //echo '<script>alert("Connection error") </script>';
+                            echo mysqli_error($conn);
+                        }
+                        else
+                        {   
+                          echo '<script> alert("Successful") </script>';
+                          //echo "Records added successfully.";
+                        }
+                    
+                    }
+                  }
+                        
+                ?>
+
               <!--/ Bordered Table -->
 
               <hr class="my-5" />
@@ -388,7 +480,8 @@
     <script src="../assets/js/main.js"></script>
 
     <!-- Page JS -->
-
+    <script type="text/javascript" src="./assets/js/ajaxWork.js"></script>    
+    <script type="text/javascript" src="./assets/js/script.js"></script>
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
   </body>

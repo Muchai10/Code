@@ -5,8 +5,16 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>aranoz</title>
-    <link rel="icon" href="img/favicon.png">
+    <!-- Basic -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    
+    <title>Menu Page</title>
+    <!-- <link rel="icon" href="img/favicon.png"> -->
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <!-- animate CSS -->
@@ -27,6 +35,20 @@
     <link rel="stylesheet" href="css/price_rangs.css">
     <!-- style CSS -->
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- slider stylesheet -->
+    <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+
+    <!-- fonts style -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="css/style1.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="css/responsive.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -36,7 +58,11 @@
             <div class="row align-items-center">
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
-                        <a class="navbar-brand" href="index.html"> <img src="img/logo.png" alt="logo"> </a>
+                        <a class="navbar-brand" href="index.php">
+                            <img src="images/logo1.png" alt="" /><span>
+                              La Sala
+                            </span>
+                        </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
@@ -51,58 +77,50 @@
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
                                         role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Shop
+                                        Menu
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
-                                        <a class="dropdown-item" href="category.html"> shop category</a>
-                                        <a class="dropdown-item" href="single-product.html">product details</a>
-
+                                        <a class="dropdown-item" href="category.html"> Breakfast</a>
+                                        <a class="dropdown-item" href="category.html"> Drinks</a>
+                                        <a class="dropdown-item" href="category.html"> Lunch And Supper</a>
+                                        <a class="dropdown-item" href="category.html"> Fruits</a>
+                                        <a class="dropdown-item" href="category.html"> Special Offers</a>
+                                        <a class="dropdown-item" href="category.html"> Tins And Cups</a>
+                                        <!-- <a class="dropdown-item" href="single-product.html"> Food Details</a> -->
+                                        
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3"
                                         role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        pages
+                                        Services
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-                                        <a class="dropdown-item" href="login.html"> login</a>
-                                        <a class="dropdown-item" href="tracking.html">tracking</a>
-                                        <a class="dropdown-item" href="checkout.html">product checkout</a>
-                                        <a class="dropdown-item" href="cart.html">shopping cart</a>
-                                        <a class="dropdown-item" href="confirmation.html">confirmation</a>
-                                        <a class="dropdown-item" href="elements.html">elements</a>
+                                        <a class="dropdown-item" href="tracking.html"> Tracking</a>
+                                        <a class="dropdown-item" href="checkout.html"> Checkout</a>
+                                        <a class="dropdown-item" href="confirmation.html"> Confirmation</a>
                                     </div>
                                 </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_2"
-                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        blog
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-                                        <a class="dropdown-item" href="blog.html"> blog</a>
-                                        <a class="dropdown-item" href="single-blog.html">Single blog</a>
-                                    </div>
-                                </li>
-
                                 <li class="nav-item">
                                     <a class="nav-link" href="contact.html">Contact</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="cart.html">Cart (0)</a>
                                 </li>
                             </ul>
                         </div>
                         <div class="hearer_icon d-flex">
-                            <a id="search_1" href="javascript:void(0)"><i class="ti-search"></i></a>
-                            <a href=""><i class="ti-heart"></i></a>
-                            <div class="dropdown cart">
-                                <a class="dropdown-toggle" href="#" id="navbarDropdown3" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-cart-plus"></i>
-                                </a>
+                            
+                            <a href="signin.php" class="btn_3">
+                                Log Out
+                            </a>
+                              
                                 <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <div class="single_product">
     
                                     </div>
                                 </div> -->
-
+                                
                             </div>
                         </div>
                     </nav>
@@ -123,7 +141,7 @@
 
     <!--================Home Banner Area =================-->
     <!-- breadcrumb start-->
-    <section class="breadcrumb breadcrumb_bg">
+    <!-- <section class="breadcrumb breadcrumb_bg">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8">
@@ -136,7 +154,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
     <!-- breadcrumb start-->
 
     <!--================Category Product Area =================-->
@@ -147,148 +165,50 @@
                     <div class="left_sidebar_area">
                         <aside class="left_widgets p_filter_widgets">
                             <div class="l_w_title">
-                                <h3>Browse Categories</h3>
+                                <h3>Categories</h3>
                             </div>
                             <div class="widgets_inner">
                                 <ul class="list">
                                     <li>
-                                        <a href="#">Frozen Fish</a>
-                                        <span>(250)</span>
+                                        <a href="#">Breakfast</a>                                   
                                     </li>
                                     <li>
-                                        <a href="#">Dried Fish</a>
-                                        <span>(250)</span>
+                                        <a href="#">Drinks</a>                                   
                                     </li>
                                     <li>
-                                        <a href="#">Fresh Fish</a>
-                                        <span>(250)</span>
+                                        <a href="category.php">Lunch and Supper</a>                                   
                                     </li>
                                     <li>
-                                        <a href="#">Meat Alternatives</a>
-                                        <span>(250)</span>
+                                        <a href="#">Fruits</a>                                   
                                     </li>
                                     <li>
-                                        <a href="#">Fresh Fish</a>
-                                        <span>(250)</span>
+                                        <a href="#">Special Offers</a>                                   
                                     </li>
                                     <li>
-                                        <a href="#">Meat Alternatives</a>
-                                        <span>(250)</span>
-                                    </li>
-                                    <li>
-                                        <a href="#">Meat</a>
-                                        <span>(250)</span>
+                                        <a href="#">Tins and cups</a>                                   
                                     </li>
                                 </ul>
                             </div>
                         </aside>
 
-                        <aside class="left_widgets p_filter_widgets">
-                            <div class="l_w_title">
-                                <h3>Product filters</h3>
-                            </div>
-                            <div class="widgets_inner">
-                                <ul class="list">
-                                    <li>
-                                        <a href="#">Apple</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Asus</a>
-                                    </li>
-                                    <li class="active">
-                                        <a href="#">Gionee</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Micromax</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Samsung</a>
-                                    </li>
-                                </ul>
-                                <ul class="list">
-                                    <li>
-                                        <a href="#">Apple</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Asus</a>
-                                    </li>
-                                    <li class="active">
-                                        <a href="#">Gionee</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Micromax</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Samsung</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </aside>
-
-                        <aside class="left_widgets p_filter_widgets">
-                            <div class="l_w_title">
-                                <h3>Color Filter</h3>
-                            </div>
-                            <div class="widgets_inner">
-                                <ul class="list">
-                                    <li>
-                                        <a href="#">Black</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Black Leather</a>
-                                    </li>
-                                    <li class="active">
-                                        <a href="#">Black with red</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Gold</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Spacegrey</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </aside>
-
-                        <aside class="left_widgets p_filter_widgets price_rangs_aside">
-                            <div class="l_w_title">
-                                <h3>Price Filter</h3>
-                            </div>
-                            <div class="widgets_inner">
-                                <div class="range_item">
-                                    <!-- <div id="slider-range"></div> -->
-                                    <input type="text" class="js-range-slider" value="" />
-                                    <div class="d-flex">
-                                        <div class="price_text">
-                                            <p>Price :</p>
-                                        </div>
-                                        <div class="price_value d-flex justify-content-center">
-                                            <input type="text" class="js-input-from" id="amount" readonly />
-                                            <span>to</span>
-                                            <input type="text" class="js-input-to" id="amount" readonly />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </aside>
                     </div>
                 </div>
                 <div class="col-lg-9">
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="product_top_bar d-flex justify-content-between align-items-center">
-                                <div class="single_product_menu">
-                                    <p><span>10000 </span> Prodict Found</p>
-                                </div>
-                                <div class="single_product_menu d-flex">
+                                <!-- <div class="single_product_menu">
+                                    <p><span>10000 </span> Food Items Found</p>
+                                </div> -->
+                                <!-- <div class="single_product_menu d-flex">
                                     <h5>short by : </h5>
                                     <select>
                                         <option data-display="Select">name</option>
                                         <option value="1">price</option>
                                         <option value="2">product</option>
                                     </select>
-                                </div>
-                                <div class="single_product_menu d-flex">
+                                </div> -->
+                                <!-- <div class="single_product_menu d-flex">
                                     <h5>show :</h5>
                                     <div class="top_pageniation">
                                         <ul>
@@ -297,8 +217,8 @@
                                             <li>3</li>
                                         </ul>
                                     </div>
-                                </div>
-                                <div class="single_product_menu d-flex">
+                                </div> -->
+                                <!-- <div class="single_product_menu d-flex">
                                     <div class="input-group">
                                         <input type="text" class="form-control" placeholder="search"
                                             aria-describedby="inputGroupPrepend">
@@ -307,12 +227,35 @@
                                                     class="ti-search"></i></span>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
 
                     <div class="row align-items-center latest_product_inner">
+
+                    <?php
+                        include "PHP/config.php";
+
+                        $query = mysqli_query($conn, "SELECT * FROM food WHERE Category_name = 'Lunch and Supper'");
+                    ?>
+
+                    <?php while ($row = mysqli_fetch_array($query)): ?>
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="single_product_item">                                      
+                                <img src="Photos/<?php echo $row['Image'];?>">
+                                <div class="single_product_text">
+                                    <h4><?php echo $row['Name']?></h2>
+                                    <h3>Ksh <?php echo $row['Price']?></h3>
+                                    <a href='# <?php echo $row['ID'] ?>&action=add' class="add_cart">Add to Cart</a>
+                                    <!-- <a href='#' class='btn btn-inverse'>Back</a> -->
+                                </div>                                       
+                            </div>
+                        </div>
+
+                    <?php endwhile; ?>
+
+                    <!-- 
                         <div class="col-lg-4 col-sm-6">
                             <div class="single_product_item">
                                 <img src="img/product/product_1.png" alt="">
@@ -402,7 +345,7 @@
                                     <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="col-lg-12">
                             <div class="pageination">
                                 <nav aria-label="Page navigation example">
@@ -413,11 +356,11 @@
                                             </a>
                                         </li>
                                         <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <!-- <li class="page-item"><a class="page-link" href="#">2</a></li>
                                         <li class="page-item"><a class="page-link" href="#">3</a></li>
                                         <li class="page-item"><a class="page-link" href="#">4</a></li>
                                         <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">6</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">6</a></li> -->
                                         <li class="page-item">
                                             <a class="page-link" href="#" aria-label="Next">
                                                 <i class="ti-angle-double-right"></i>
@@ -435,58 +378,58 @@
     <!--================End Category Product Area =================-->
 
     <!-- product_list part start-->
-    <section class="product_list best_seller">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-12">
-                    <div class="section_tittle text-center">
-                        <h2>Best Sellers <span>shop</span></h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row align-items-center justify-content-between">
-                <div class="col-lg-12">
-                    <div class="best_product_slider owl-carousel">
-                        <div class="single_product_item">
-                            <img src="img/product/product_1.png" alt="">
-                            <div class="single_product_text">
-                                <h4>Quartz Belt Watch</h4>
-                                <h3>$150.00</h3>
-                            </div>
-                        </div>
-                        <div class="single_product_item">
-                            <img src="img/product/product_2.png" alt="">
-                            <div class="single_product_text">
-                                <h4>Quartz Belt Watch</h4>
-                                <h3>$150.00</h3>
-                            </div>
-                        </div>
-                        <div class="single_product_item">
-                            <img src="img/product/product_3.png" alt="">
-                            <div class="single_product_text">
-                                <h4>Quartz Belt Watch</h4>
-                                <h3>$150.00</h3>
-                            </div>
-                        </div>
-                        <div class="single_product_item">
-                            <img src="img/product/product_4.png" alt="">
-                            <div class="single_product_text">
-                                <h4>Quartz Belt Watch</h4>
-                                <h3>$150.00</h3>
-                            </div>
-                        </div>
-                        <div class="single_product_item">
-                            <img src="img/product/product_5.png" alt="">
-                            <div class="single_product_text">
-                                <h4>Quartz Belt Watch</h4>
-                                <h3>$150.00</h3>
-                            </div>
+    <?php 
+        // //include ('PHP/config.php');
+        // include "PHP/config.php";
+        // $sql="SELECT * from food";
+        // $result=$conn-> query($sql);
+        // $count=1;
+        // if ($result-> num_rows > 0){
+        // while ($row=$result-> fetch_assoc()) {
+    ?>
+        <section class="product_list section_padding">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-12">
+                        <div class="section_tittle text-center">
+                            <h2>Our Special Dishes</h2>
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <?php
+                        //while($row = mysqli_fetch_assoc($result)){
+                    ?>
+                    <div class="col-lg-12">
+                        <div class="product_list">                         
+                            <div class="row align-items-center justify-content-between">
+
+                            <?php
+                                $query = mysqli_query($conn, "SELECT * FROM food LIMIT 4");
+                                ?>
+
+                                <?php while ($row = mysqli_fetch_array($query)): ?>
+                                    <div class="col-lg-3 col-sm-6">
+                                        <div class="single_product_item">                                      
+                                            <img src="Photos/<?php echo $row['Image'];?>">
+                                            <div class="single_product_text">
+                                                <h4><?php echo $row['Name']?></h2>
+                                                <h3>Ksh <?php echo $row['Price']?></h3>
+                                                <!-- <a href='# <?php echo $row['ID'] ?>&action=add' class="add_cart">Add to Cart<i class="ti-heart"></i></a>
+                                                <a href='#' class='btn btn-inverse'>Back</a> -->
+                                            </div>                                       
+                                        </div>
+                                    </div>
+
+                                <?php endwhile; ?>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
     <!-- product_list part end-->
 
     <!--::footer_part start::-->
@@ -495,52 +438,42 @@
             <div class="row justify-content-around">
                 <div class="col-sm-6 col-lg-2">
                     <div class="single_footer_part">
-                        <h4>Top Products</h4>
+                        <h4>Food</h4>
                         <ul class="list-unstyled">
-                            <li><a href="">Managed Website</a></li>
-                            <li><a href="">Manage Reputation</a></li>
-                            <li><a href="">Power Tools</a></li>
-                            <li><a href="">Marketing Service</a></li>
+                            <li><a href="">Menu</a></li>
+                            <li><a href="">Special Dishes</a></li>
+                            <li><a href="">Order</a></li>
+                            <li><a href="">Delivery</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-2">
                     <div class="single_footer_part">
-                        <h4>Quick Links</h4>
+                        <h4>Support</h4>
                         <ul class="list-unstyled">
-                            <li><a href="">Jobs</a></li>
-                            <li><a href="">Brand Assets</a></li>
-                            <li><a href="">Investor Relations</a></li>
-                            <li><a href="">Terms of Service</a></li>
+                            <li><a href="">Volunteer</a></li>
+                            <li><a href="">Hire Us</a></li>
+                            <li><a href="">Careers</a></li>
+                            <li><a href="">Upcoming Events</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-2">
                     <div class="single_footer_part">
-                        <h4>Features</h4>
+                        <h4>Services</h4>
                         <ul class="list-unstyled">
-                            <li><a href="">Jobs</a></li>
-                            <li><a href="">Brand Assets</a></li>
-                            <li><a href="">Investor Relations</a></li>
-                            <li><a href="">Terms of Service</a></li>
+                            <li><a href="">Contact</a></li>
+                            <li><a href="">Message</a></li>
+                            <li><a href="">Tracking</a></li>
+                            <li><a href="">Checkout</a></li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-sm-6 col-lg-2">
-                    <div class="single_footer_part">
-                        <h4>Resources</h4>
-                        <ul class="list-unstyled">
-                            <li><a href="">Guides</a></li>
-                            <li><a href="">Research</a></li>
-                            <li><a href="">Experts</a></li>
-                            <li><a href="">Agencies</a></li>
-                        </ul>
-                    </div>
-                </div>
+
                 <div class="col-sm-6 col-lg-4">
                     <div class="single_footer_part">
-                        <h4>Newsletter</h4>
-                        <p>Heaven fruitful doesn't over lesser in days. Appear creeping
+                        <h4>Subscribe Now</h4>
+                        <p>Subscribe to our newsletter.
                         </p>
                         <div id="mc_embed_signup">
                             <form target="_blank"
@@ -550,14 +483,14 @@
                                     class="placeholder hide-on-focus" onfocus="this.placeholder = ''"
                                     onblur="this.placeholder = ' Email Address '">
                                 <button type="submit" name="submit" id="newsletter-submit"
-                                    class="email_icon newsletter-submit button-contactForm">subscribe</button>
+                                    class="email_icon newsletter-submit button-contactForm">Subscribe</button>
                                 <div class="mt-10 info"></div>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-
+            
         </div>
         <div class="copyright_part">
             <div class="container">
@@ -565,7 +498,7 @@
                     <div class="col-lg-8">
                         <div class="copyright_text">
                             <P><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved.</a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></P>
                         </div>
                     </div>
@@ -574,8 +507,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                             <ul class="list-unstyled">
                                 <li><a href="#" class="single_social_icon"><i class="fab fa-facebook-f"></i></a></li>
                                 <li><a href="#" class="single_social_icon"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#" class="single_social_icon"><i class="fas fa-globe"></i></a></li>
-                                <li><a href="#" class="single_social_icon"><i class="fab fa-behance"></i></a></li>
+                                <li><a href="#" class="single_social_icon"><i class="fab fa-instagram"></i></a></li>
                             </ul>
                         </div>
                     </div>

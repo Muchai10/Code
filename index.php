@@ -58,7 +58,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
-                        <a class="navbar-brand" href="index.html">
+                        <a class="navbar-brand" href="index.php">
                             <img src="images/logo1.png" alt="" /><span>
                               La Sala
                             </span>
@@ -86,7 +86,7 @@
                                         <a class="dropdown-item" href="category.html"> Fruits</a>
                                         <a class="dropdown-item" href="category.html"> Special Offers</a>
                                         <a class="dropdown-item" href="category.html"> Tins And Cups</a>
-                                        <a class="dropdown-item" href="single-product.html"> Food Details</a>
+                                        <!-- <a class="dropdown-item" href="single-product.html"> Food Details</a> -->
                                         
                                     </div>
                                 </li>
@@ -247,10 +247,35 @@
                     </div>
                 </div>
                 <div class="row">
+                    <?php
+                        //while($row = mysqli_fetch_assoc($result)){
+                    ?>
                     <div class="col-lg-12">
                         <div class="product_list">                         
-                                <div class="row align-items-center justify-content-between">
+                            <div class="row align-items-center justify-content-between">
+
+                            <?php
+                                include "PHP/config.php";
+
+                                $query = mysqli_query($conn, "SELECT * FROM food");
+                                ?>
+
+                                <?php while ($row = mysqli_fetch_array($query)): ?>
                                     <div class="col-lg-3 col-sm-6">
+                                        <div class="single_product_item">                                      
+                                            <img src="Photos/<?php echo $row['Image'];?>">
+                                            <div class="single_product_text">
+                                                <h4><?php echo $row['Name']?></h2>
+                                                <h3>Ksh <?php echo $row['Price']?></h3>
+                                                <!-- <a href='# <?php echo $row['ID'] ?>&action=add' class="add_cart">Add to Cart<i class="ti-heart"></i></a>
+                                                <a href='#' class='btn btn-inverse'>Back</a> -->
+                                            </div>                                       
+                                        </div>
+                                    </div>
+
+                                <?php endwhile; ?>
+                           
+                                    <!-- <div class="col-lg-3 col-sm-6">
                                         <div class="single_product_item">
                                             <img src="img/product/product_1.png" alt="">
                                             <div class="single_product_text">
@@ -329,15 +354,18 @@
                                                 <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                             </div>
+                            
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-    <!-- product_list part start-->
 
+
+    <!-- product_list part start-->
+    
     <!--::footer_part start::-->
     <footer class="footer_part">
         <div class="container">
