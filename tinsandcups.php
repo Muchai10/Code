@@ -170,22 +170,22 @@
                             <div class="widgets_inner">
                                 <ul class="list">
                                     <li>
-                                        <a href="#">Breakfast</a>                                   
+                                        <a href="breakfast.php">Breakfast</a>                                   
                                     </li>
                                     <li>
-                                        <a href="#">Drinks</a>                                   
+                                        <a href="drinks.php">Drinks</a>                                   
                                     </li>
                                     <li>
                                         <a href="category.php">Lunch and Supper</a>                                   
                                     </li>
                                     <li>
-                                        <a href="#">Fruits</a>                                   
+                                        <a href="fruits.php">Fruits</a>                                   
                                     </li>
                                     <li>
-                                        <a href="#">Special Offers</a>                                   
+                                        <a href="specialoffers.php">Special Offers</a>                                   
                                     </li>
                                     <li>
-                                        <a href="#">Tins and cups</a>                                   
+                                        <a href="tinsandcups.php">Tins and cups</a>                                   
                                     </li>
                                 </ul>
                             </div>
@@ -237,7 +237,7 @@
                     <?php
                         include "PHP/config.php";
 
-                        $query = mysqli_query($conn, "SELECT * FROM food WHERE Category_name = 'Lunch and Supper'");
+                        $query = mysqli_query($conn, "SELECT * FROM food WHERE Category_name = 'Tins and Cups'");
                     ?>
 
                     <?php while ($row = mysqli_fetch_array($query)): ?>

@@ -72,7 +72,7 @@
                         <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="index.html">Home</a>
+                                    <a class="nav-link" href="index.php">Home</a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
@@ -80,12 +80,12 @@
                                         Menu
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
-                                        <a class="dropdown-item" href="category.html"> Breakfast</a>
-                                        <a class="dropdown-item" href="category.html"> Drinks</a>
-                                        <a class="dropdown-item" href="category.html"> Lunch And Supper</a>
-                                        <a class="dropdown-item" href="category.html"> Fruits</a>
-                                        <a class="dropdown-item" href="category.html"> Special Offers</a>
-                                        <a class="dropdown-item" href="category.html"> Tins And Cups</a>
+                                        <a class="dropdown-item" href="breakfast.php"> Breakfast</a>
+                                        <a class="dropdown-item" href="drinks.php"> Drinks</a>
+                                        <a class="dropdown-item" href="category.php"> Lunch And Supper</a>
+                                        <a class="dropdown-item" href="fruits.php"> Fruits</a>
+                                        <a class="dropdown-item" href="specialoffers.php"> Special Offers</a>
+                                        <a class="dropdown-item" href="tinsandcups,php"> Tins And Cups</a>
                                         <!-- <a class="dropdown-item" href="single-product.html"> Food Details</a> -->
                                         
                                     </div>
@@ -170,22 +170,22 @@
                             <div class="widgets_inner">
                                 <ul class="list">
                                     <li>
-                                        <a href="#">Breakfast</a>                                   
+                                        <a href="breakfast.php">Breakfast</a>                                   
                                     </li>
                                     <li>
-                                        <a href="#">Drinks</a>                                   
+                                        <a href="drinks.php">Drinks</a>                                   
                                     </li>
                                     <li>
                                         <a href="category.php">Lunch and Supper</a>                                   
                                     </li>
                                     <li>
-                                        <a href="#">Fruits</a>                                   
+                                        <a href="fruits.php">Fruits</a>                                   
                                     </li>
                                     <li>
-                                        <a href="#">Special Offers</a>                                   
+                                        <a href="specialoffers.php">Special Offers</a>                                   
                                     </li>
                                     <li>
-                                        <a href="#">Tins and cups</a>                                   
+                                        <a href="tinsandcups.php">Tins and cups</a>                                   
                                     </li>
                                 </ul>
                             </div>
@@ -422,7 +422,7 @@
                                     </div>
 
                                 <?php endwhile; ?>
-                                
+
                             </div>
                             
                         </div>

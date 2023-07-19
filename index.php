@@ -72,7 +72,7 @@
                         <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="index.html">Home</a>
+                                    <a class="nav-link" href="index.php">Home</a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
@@ -80,12 +80,12 @@
                                         Menu
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
-                                        <a class="dropdown-item" href="category.html"> Breakfast</a>
-                                        <a class="dropdown-item" href="category.html"> Drinks</a>
-                                        <a class="dropdown-item" href="category.html"> Lunch And Supper</a>
-                                        <a class="dropdown-item" href="category.html"> Fruits</a>
-                                        <a class="dropdown-item" href="category.html"> Special Offers</a>
-                                        <a class="dropdown-item" href="category.html"> Tins And Cups</a>
+                                        <a class="dropdown-item" href="breakfast.php"> Breakfast</a>
+                                        <a class="dropdown-item" href="drinks.php"> Drinks</a>
+                                        <a class="dropdown-item" href="category.php"> Lunch And Supper</a>
+                                        <a class="dropdown-item" href="fruits.php"> Fruits</a>
+                                        <a class="dropdown-item" href="specialoffers.php"> Special Offers</a>
+                                        <a class="dropdown-item" href="tinsandcups,php"> Tins And Cups</a>
                                         <!-- <a class="dropdown-item" href="single-product.html"> Food Details</a> -->
                                         
                                     </div>
@@ -257,7 +257,7 @@
                             <?php
                                 include "PHP/config.php";
 
-                                $query = mysqli_query($conn, "SELECT * FROM food");
+                                $query = mysqli_query($conn, "SELECT * FROM food WHERE Category_name = 'Lunch and supper'");
                                 ?>
 
                                 <?php while ($row = mysqli_fetch_array($query)): ?>
