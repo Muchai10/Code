@@ -271,7 +271,7 @@
                       <h5 class="card-title">Total No. Of Orders</h5>
                       <h5>
                         <?php
-                            $sql="SELECT * from orders";
+                            $sql="SELECT * from cart";
                             $result=$conn-> query($sql);
                             $count=0;
                             if ($result-> num_rows !=0 ){

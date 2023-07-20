@@ -105,7 +105,7 @@
                                     <a class="nav-link" href="contact.html">Contact</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="cart.html">Cart (0)</a>
+                                    <a class="nav-link" href="cart.php">Cart (0)</a>
                                 </li>
                             </ul>
                         </div>
@@ -247,7 +247,7 @@
                                 <div class="single_product_text">
                                     <h4><?php echo $row['Name']?></h2>
                                     <h3>Ksh <?php echo $row['Price']?></h3>
-                                    <a href='# <?php echo $row['ID'] ?>&action=add' class="add_cart">Add to Cart</a>
+                                    <a href='cart.php?id=<?php echo $row['Food_ID'] ?>&action=add' class="add_cart">+ Add to Cart</a>
                                     <!-- <a href='#' class='btn btn-inverse'>Back</a> -->
                                 </div>                                       
                             </div>

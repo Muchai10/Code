@@ -214,6 +214,7 @@
                           <th>ID</th>
                           <th>Image</th>
                           <th>Name</th>
+                          <th>Quantity</th>
                           <th>Price</th>
                           <th>Category</th>
                           <th>Action</th>
@@ -230,9 +231,10 @@
            
                         ?>
                         <tr>
-                          <td><?=$row["ID"]?></td>
+                          <td><?=$row["Food_ID"]?></td>
                           <td><img src="Photos/<?php echo $row['Image'];?>" alt="" height = "100px" width = "100px"></td>
                           <td><?=$row["Name"]?></td>
+                          <td><?=$row["Quantity"]?></td>
                           <td><?=$row["Price"]?></td>
                           <td><?=$row["Category_name"]?></td>
     
@@ -295,6 +297,10 @@
                             <div class="form-group">
                             <label for="name">Name:</label>
                             <input type="text" class="form-control" name="p_name" id="p_name" required>
+                            </div>
+                            <div class="form-group">
+                            <label for="price">Quantity:</label>
+                            <input type="number" class="form-control" name="quantity" id="quantity" required>
                             </div>
                             <div class="form-group">
                             <label for="price">Price:</label>
@@ -360,6 +366,7 @@
                     {
                         $id = mysqli_real_escape_string($conn,$_POST['p_id']);
                         $name = mysqli_real_escape_string($conn,$_POST['p_name']);
+                        $qty = mysqli_real_escape_string($conn,$_POST['quantity']);
                         $price = mysqli_real_escape_string($conn,$_POST['p_price']);
                         $category = mysqli_real_escape_string($conn,$_POST['category']);
                         
@@ -413,8 +420,8 @@
                         
 
                         $insert = mysqli_query($conn,"INSERT INTO food
-                        (ID,Image,Name,Price,Category_name) 
-                        VALUES ('$id','$image_name','$name','$price','$category')");
+                        (Food_ID,Image,Name,Quantity,Price,Category_name) 
+                        VALUES ('$id','$image_name','$name','$qty','$price','$category')");
                 
                         if(!$insert)
                         {

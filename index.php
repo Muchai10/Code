@@ -105,7 +105,7 @@
                                     <a class="nav-link" href="contact.html">Contact</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="cart.html">Cart (0)</a>
+                                    <a class="nav-link" href="cart.php">Cart (0)</a>
                                 </li>
                             </ul>
                         </div>
@@ -153,7 +153,7 @@
                                                 La Sala</h1>
                                             <p>La Sala is the perfect place to enjoy a delicious meal with friends and family. Indulge in our diverse
                                                and tantalizing food options, all offered at wallet-friendly prices.</p>
-                                            <a href="#" class="btn_2">Order now</a>
+                                            <a href="category.php" class="btn_2">Order now</a>
                                     </div>
                                 </div>
                             </div>
@@ -227,7 +227,7 @@
         </div>
       </div>
       <div class="d-flex justify-content-center">
-        <a href="" class="btn_3">
+        <a href="category.php" class="btn_3">
           ORDER NOW
         </a>
       </div>
@@ -267,7 +267,7 @@
                                             <div class="single_product_text">
                                                 <h4><?php echo $row['Name']?></h2>
                                                 <h3>Ksh <?php echo $row['Price']?></h3>
-                                                <!-- <a href='# <?php echo $row['ID'] ?>&action=add' class="add_cart">Add to Cart<i class="ti-heart"></i></a>
+                                                <!-- <a href='# <?php echo $row['Food_ID'] ?>&action=add' class="add_cart">Add to Cart<i class="ti-heart"></i></a>
                                                 <a href='#' class='btn btn-inverse'>Back</a> -->
                                             </div>                                       
                                         </div>
