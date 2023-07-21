@@ -7,11 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Basic -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <!-- Site Metas -->
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    
+
     <title>Menu Page</title>
     <!-- <link rel="icon" href="img/favicon.png"> -->
 
@@ -236,22 +232,52 @@
 
                     <?php
                         include "PHP/config.php";
+ 
+                        if(isset($_POST['add_to_cart'])){
+                            $name = mysqli_real_escape_string($conn,$_POST['name']);
+                            //$name = $_POST['Name'];
+                            $qty = 1;
+                            //$price = $_POST['Price'];
+                            $price = mysqli_real_escape_string($conn,$_POST['price']);
+
+                            $query = mysqli_query($conn, "SELECT * FROM cart WHERE Name = $name");
+
+                            if(mysqli_num_rows($query) > 0) {
+                                $message[] = 'Product already added to cart';
+                            }
+                            else{
+                                $insert = mysqli_query($conn,"INSERT INTO cart
+                                (Name,Quantity,Price) 
+                                VALUES ('$name','$qty','$price')");
+                                $message[] = 'Product added to cart successfully';
+                            }
+                        }
+
 
                         $query = mysqli_query($conn, "SELECT * FROM food WHERE Category_name = 'Lunch and Supper'");
                     ?>
 
                     <?php while ($row = mysqli_fetch_array($query)): ?>
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="single_product_item">                                      
-                                <img src="Photos/<?php echo $row['Image'];?>">
-                                <div class="single_product_text">
-                                    <h4><?php echo $row['Name']?></h2>
-                                    <h3>Ksh <?php echo $row['Price']?></h3>
-                                    <a href='cart.php?id=<?php echo $row['Food_ID'] ?>&action=add' class="add_cart">+ Add to Cart</a>
-                                    <!-- <a href='#' class='btn btn-inverse'>Back</a> -->
-                                </div>                                       
+                    
+                            <div class="col-lg-4 col-sm-6">
+                                <div class="single_product_item"> 
+                                <form action="" method="post">                                     
+                                    <img src="Photos/<?php echo $row['Image'];?>">
+                                    <div class="single_product_text">
+                                        <!-- <div class="field input">
+                                            <label for="Name">Name</label>
+                                            <input type="text" name="Last_Name" id="Last_Name" pattern="^(?=.{1,40}$)[a-zA-Z]+(?:[-'\s][a-zA-Z]+)*$" autocomplete="off" required>
+                                        </div> -->
+                                        <h4 id="Name" name='Name'><?php echo $row['Name']?></h4>
+                                        <!-- <input type="hidden" name="price" value="Ksh <?php //echo $fetch_product['Price']?>"> -->
+                                        <h3 id="Price" name='Price'>Ksh <?php echo $row['Price']?></h3>
+                                        <input type="submit" class="btn btn-inverse btn-outline-info" value="+ Add to Cart" id="add_to_cart" name="add_to_cart">
+                                        <!-- <a href='cart3.php?id=<?php //echo $row['Food_ID'] ?>&action=add' class="add_cart">+ Add to Cart</a> -->
+                                        <!-- <a href='#' type="" class='btn btn-inverse'>Back</a> -->
+                                    </div>                                       
+                                </div>
                             </div>
-                        </div>
+                        </form>
 
                     <?php endwhile; ?>
 

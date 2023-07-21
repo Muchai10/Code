@@ -195,7 +195,7 @@ if (!isset($_SESSION['cart'])) {
                   break;
                 case 'add_':
 
-                  // $query = "SELECT Quantity FROM food WHERE ID = '$id'";
+                  // $query = "SELECT Quantity FROM food WHERE Food_ID = '$id'";
                   // $result = mysqli_query($conn, $query);
                 
                   // if ($result && mysqli_num_rows($result) > 0) {
@@ -203,7 +203,7 @@ if (!isset($_SESSION['cart'])) {
                   // 	$quantity_available = $row['Quantity'];
 
                   // 	if (isset($_SESSION['cart'][$id])) {
-                  // 		$qty = $_SESSION['cart'][$id] + 1;
+                  // 		$qty =+ 1;
                   // 	} else {
                   // 		$qty = 1;
                   // 	}
@@ -267,7 +267,8 @@ if (!isset($_SESSION['cart'])) {
                     // echo "<td>".$product_size."</td>";
                     echo "<td><input type='hidden' required value='".$qty."' name='qty[]'>".$qty."</td>";
                     echo "<td>".$price."</td>";
-                    echo "<td><a href='cart.php?id=" . $id . "&qty=" . ($qty + 1) . "'><i class='icon-plus-sign'> + </i></a></td>";
+                    //echo "<td><a href='cart.php?id=".$id."&qty=".($qty + 1)."'><i class='icon-plus-sign'> + </i></a></td>";
+                    echo "<td><a href='cart.php?id=<?php echo $id;?>&qty=<?php echo $qty + 1; ?'><i class='icon-plus-sign'> + </i></a></td>";
                     echo "<td><a href='cart.php?id=".$id."&action=remove'><i class='icon-minus-sign'> - </i></a></td>";
                     echo "<td><strong>P ".$line_cost."</strong></td>";
                     echo "</tr>";
@@ -364,7 +365,12 @@ if (!isset($_SESSION['cart'])) {
               <br />	
           </div>
 
-            <!--<thead>
+             <!-- <section class="cart_area padding_top">
+                <div class="container">
+                  <div class="cart_inner">
+                    <div class="table-responsive">
+                      <table class="table"> 
+            <thead>
               <tr>
                 <th scope="col">Product</th>
                 <th scope="col">Price</th>
@@ -413,7 +419,7 @@ if (!isset($_SESSION['cart'])) {
                   <h5>$360.00</h5>
                 </td>
                 <td>
-                  <div class="product_count"> -->
+                  <div class="product_count"> --> 
                     <!-- <input type="text" value="1" min="0" max="10" title="Quantity:"
                       class="input-text qty input-number" />
                     <button
@@ -521,8 +527,9 @@ if (!isset($_SESSION['cart'])) {
                   </div>
                 </td>
               </tr>
-            </tbody>-->
-          <!-- </table> -->
+            </tbody>
+            
+          </table> 
         </div>
       </div>
     </div>
