@@ -1,3 +1,8 @@
+<?php
+	include "PHP/session.php";
+    include "PHP/config.php";	
+?>
+
 <!doctype html>
 <html lang="zxx">
 
@@ -96,8 +101,8 @@
                                         Services
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-                                        <a class="dropdown-item" href="tracking.html"> Tracking</a>
-                                        <a class="dropdown-item" href="checkout.html"> Checkout</a>
+                                        <a class="dropdown-item" href="tracking.php"> Tracking</a>
+                                        <!-- <a class="dropdown-item" href="checkout.html"> Checkout</a> -->
                                         <a class="dropdown-item" href="confirmation.html"> Confirmation</a>
                                     </div>
                                 </li>
@@ -105,15 +110,37 @@
                                     <a class="nav-link" href="contact.html">Contact</a>
                                 </li>
                                 <li class="nav-item">
+
                                     <a class="nav-link" href="cart.php">Cart (0)</a>
                                 </li>
                             </ul>
                         </div>
                         <div class="hearer_icon d-flex">
+                            <?php
+                               if (isset($_SESSION['Student_ID'])) {
+                                $id = $_SESSION['Student_ID'];
                             
-                            <a href="signin.php" class="btn_3">
-                                Log Out
-                            </a>
+                                $query = mysqli_query($conn, "SELECT * FROM student WHERE Student_ID='$id'") or die("Select Error");
+                                $fetch = mysqli_fetch_array($query);
+                            
+                                // Rest of the code that uses $fetch array
+                                } else {
+                                    // Handle the case when Student_ID is not set in the session
+                                    echo "Student ID not found in the session.";
+                                }
+                            ?>
+
+                            
+                                    <ul>
+                                    <!-- <a href="signin.php" class="btn_3"> -->
+                                    <button type="button" class="btn_3" style="height:40px" data-toggle="modal" data-target="#myProfile">
+                                        My Profile
+                                    </button>
+                                        <!-- <li>Welcome:<a href="#profile" href  data-toggle="modal"><i class="icon-user icon-white"></i><?php //echo $fetch['First_Name']; ?>&nbsp;<?php //echo $fetch['Last_Name'];?></a></li> -->
+                                    </ul>
+                                    
+                                    
+                            
                               
                                 <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <div class="single_product">
@@ -127,7 +154,7 @@
                 </div>
             </div>
         </div>
-        <div class="search_input" id="search_input_box">
+        <!-- <div class="search_input" id="search_input_box">
             <div class="container ">
                 <form class="d-flex justify-content-between search-inner">
                     <input type="text" class="form-control" id="search_input" placeholder="Search Here">
@@ -135,8 +162,56 @@
                     <span class="ti-close" id="close_search" title="Close Search"></span>
                 </form>
             </div>
-        </div>
+        </div> -->
+                                  
     </header>
+                <!-- Modal -->
+                <div class="modal fade" id="myProfile" role="dialog">
+                    <div class="modal-dialog">
+                    
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h4 class="modal-title">My Profile</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <?php
+                                $id = $_SESSION['Student_ID'];
+                            
+                                $query = mysqli_query($conn, "SELECT * FROM student WHERE Student_ID='$id'") or die("Select Error");
+                                $fetch = mysqli_fetch_array($query);
+                            ?>
+
+                        <form  enctype='multipart/form-data' method="POST">
+                            <center>
+							<table>
+                                <tr>
+									<td class="profile">Student ID:</td><td class="profile">&nbsp;<?php echo $fetch['Student_ID'];?></td>
+								</tr>
+								<tr>
+									<td class="profile">Name:</td><td class="profile">&nbsp;<?php echo $fetch['First_Name'];?>&nbsp;<?php echo $fetch['Last_Name'];?></td>
+								</tr>
+								<tr>
+									<td class="profile">Email Address:</td><td class="profile">&nbsp;<?php echo $fetch['Email_Address'];?></td>
+								</tr>								
+								<tr>
+									<td class="profile">Phone Number:</td><td class="profile">&nbsp;<?php echo $fetch['Phone_Number'];?></td>
+								</tr>
+							</table>
+						</center>
+
+                        </div>
+                        <div class="modal-footer">
+                        <a href="account.php?id=<?php echo $fetch['Student_ID']; ?>"><input type="button" class="btn btn-success" name="edit" value="Edit Account"></a>
+                        <a href="signin.php"><input type="button" class="btn btn-danger" name="" value="Log Out"></a>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" style="height:40px">Close</button>
+                        </div>
+                    </div>
+                    
+                    </div>
+                </div>
+
     <!-- Header part end-->
 
     <!-- banner part start-->
@@ -255,8 +330,6 @@
                             <div class="row align-items-center justify-content-between">
 
                             <?php
-                                include "PHP/config.php";
-
                                 $query = mysqli_query($conn, "SELECT * FROM food WHERE Category_name = 'Lunch and supper'");
                                 ?>
 

@@ -1,8 +1,3 @@
-<?php
-	include "PHP/session.php";
-    include "PHP/config.php";	
-?>
-
 <!doctype html>
 <html lang="zxx">
 
@@ -12,11 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Basic -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <!-- Site Metas -->
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    
+
     <title>Menu Page</title>
     <!-- <link rel="icon" href="img/favicon.png"> -->
 
@@ -101,8 +92,8 @@
                                         Services
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-                                        <a class="dropdown-item" href="tracking.php"> Tracking</a>
-                                        <!-- <a class="dropdown-item" href="checkout.html"> Checkout</a> -->
+                                        <a class="dropdown-item" href="tracking.html"> Tracking</a>
+                                        <a class="dropdown-item" href="checkout.html"> Checkout</a>
                                         <a class="dropdown-item" href="confirmation.html"> Confirmation</a>
                                     </div>
                                 </li>
@@ -115,31 +106,10 @@
                             </ul>
                         </div>
                         <div class="hearer_icon d-flex">
-                            <?php
-                               if (isset($_SESSION['Student_ID'])) {
-                                $id = $_SESSION['Student_ID'];
                             
-                                $query = mysqli_query($conn, "SELECT * FROM student WHERE Student_ID='$id'") or die("Select Error");
-                                $fetch = mysqli_fetch_array($query);
-                            
-                                // Rest of the code that uses $fetch array
-                                } else {
-                                    // Handle the case when Student_ID is not set in the session
-                                    echo "Student ID not found in the session.";
-                                }
-                            ?>
-
-                            
-                                    <ul>
-                                    <!-- <a href="signin.php" class="btn_3"> -->
-                                    <button type="button" class="btn_3" style="height:40px" data-toggle="modal" data-target="#myProfile">
-                                        My Profile
-                                    </button>
-                                        <!-- <li>Welcome:<a href="#profile" href  data-toggle="modal"><i class="icon-user icon-white"></i><?php //echo $fetch['First_Name']; ?>&nbsp;<?php //echo $fetch['Last_Name'];?></a></li> -->
-                                    </ul>
-                                    
-                                    
-                            
+                            <a href="signin.php" class="btn_3">
+                                Log Out
+                            </a>
                               
                                 <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <div class="single_product">
@@ -153,7 +123,7 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="search_input" id="search_input_box">
+        <div class="search_input" id="search_input_box">
             <div class="container ">
                 <form class="d-flex justify-content-between search-inner">
                     <input type="text" class="form-control" id="search_input" placeholder="Search Here">
@@ -161,58 +131,9 @@
                     <span class="ti-close" id="close_search" title="Close Search"></span>
                 </form>
             </div>
-        </div> -->
-                                  
+        </div>
     </header>
-                <!-- Modal -->
-                <div class="modal fade" id="myProfile" role="dialog">
-                    <div class="modal-dialog">
-                    
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <h4 class="modal-title">My Profile</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-                        <div class="modal-body">
-                            <?php
-                                $id = $_SESSION['Student_ID'];
-                            
-                                $query = mysqli_query($conn, "SELECT * FROM student WHERE Student_ID='$id'") or die("Select Error");
-                                $fetch = mysqli_fetch_array($query);
-                            ?>
-
-                        <form  enctype='multipart/form-data' method="POST">
-                            <center>
-							<table>
-                                <tr>
-									<td class="profile">Student ID:</td><td class="profile">&nbsp;<?php echo $fetch['Student_ID'];?></td>
-								</tr>
-								<tr>
-									<td class="profile">Name:</td><td class="profile">&nbsp;<?php echo $fetch['First_Name'];?>&nbsp;<?php echo $fetch['Last_Name'];?></td>
-								</tr>
-								<tr>
-									<td class="profile">Email Address:</td><td class="profile">&nbsp;<?php echo $fetch['Email_Address'];?></td>
-								</tr>								
-								<tr>
-									<td class="profile">Phone Number:</td><td class="profile">&nbsp;<?php echo $fetch['Phone_Number'];?></td>
-								</tr>
-							</table>
-						</center>
-
-                        </div>
-                        <div class="modal-footer">
-                        <a href="account.php?id=<?php echo $fetch['Student_ID']; ?>"><input type="button" class="btn btn-success" name="edit" value="Edit Account"></a>
-                        <a href="signin.php"><input type="button" class="btn btn-danger" name="" value="Log Out"></a>
-                        <button type="button" class="btn btn-default" data-dismiss="modal" style="height:40px">Close</button>
-                        </div>
-                    </div>
-                    
-                    </div>
-                </div>
-
     <!-- Header part end-->
-
 
     <!--================Home Banner Area =================-->
     <!-- breadcrumb start-->
@@ -311,24 +232,51 @@
 
                     <?php
                         include "PHP/config.php";
+                        $name;
+
+                        if (isset($_POST['add_to_cart'])) {
+                            $cartid = 1;
+                            $name = isset($_POST['Name']) ? mysqli_real_escape_string($conn, $_POST['Name']) : '';
+                            $price = isset($_POST['Price']) ? mysqli_real_escape_string($conn, $_POST['Price']) : '';
+                            $qty = 1;
+                            $food_id = isset($_POST['Food_ID']) ? (int)$_POST['Food_ID'] : 0; // Assuming ProductID is an integer field
+
+                            // Rest of the code for adding to cart
+                            $insert = mysqli_query($conn, "INSERT INTO cart (Cart_ID, Name, Quantity, Price, Food_ID) VALUES ('$cartid','$name', '$qty', '$price', '$food_id')");
+                            if ($insert) {
+                                $message[] = 'Product added to cart successfully';
+                            } else {
+                                // Display or log the MySQL error for debugging
+                                echo "MySQL Error: " . mysqli_error($conn);
+                            }
+                        }
 
                         $query = mysqli_query($conn, "SELECT * FROM food WHERE Category_name = 'Lunch and Supper'");
-                    ?>
+                        ?>
 
-                    <?php while ($row = mysqli_fetch_array($query)): ?>
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="single_product_item">                                      
-                                <img src="Photos/<?php echo $row['Image'];?>">
-                                <div class="single_product_text">
-                                    <h4><?php echo $row['Name']?></h2>
-                                    <h3>Ksh <?php echo $row['Price']?></h3>
-                                    <a href='cart2.php?id=<?php echo $row['Food_ID'] ?>&action=add' class="add_cart">+ Add to Cart</a>
-                                    <!-- <a href='#' class='btn btn-inverse'>Back</a> -->
-                                </div>                                       
+                        <form action="" method="post">
+                            <div class="row">
+                                <?php while ($row = mysqli_fetch_array($query)): ?>
+                                    <div class="col-lg-4 col-sm-6">
+                                        <div class="single_product_item">
+                                            <img src="Photos/<?php echo $row['Image']; ?>">
+                                            <div class="single_product_text">
+                                                <h4><?php echo $row['Name']; ?></h4>
+                                                <h3>Ksh <?php echo $row['Price']; ?></h3>
+                                                <!-- <input type="hidden" name="Cart_ID" value="<?php //echo $row['Cart_ID']; ?>"> -->
+                                                <input type="hidden" name="Name" value="<?php echo $row['Name']; ?>">
+                                                <input type="hidden" name="Price" value="<?php echo $row['Price']; ?>">
+                                                <input type="hidden" name="Food_ID" value="<?php echo $row['Food_ID']; ?>">
+                                                <button type="submit" class="btn btn-inverse btn-outline-info" name="add_to_cart">
+                                                    + Add to Cart
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endwhile; ?>
                             </div>
-                        </div>
+                        </form>
 
-                    <?php endwhile; ?>
 
                     <!-- 
                         <div class="col-lg-4 col-sm-6">
@@ -497,7 +445,7 @@
                                     </div>
 
                                 <?php endwhile; ?>
-                                
+
                             </div>
                             
                         </div>

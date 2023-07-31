@@ -1,18 +1,28 @@
 <?php
-	include '../PHP/config.php';
-	session_start();
+session_start();
 
-	if(!isset($_SESSION['admin']) || trim($_SESSION['admin']) == ''){
-		header('location: ../index.php');
-		exit();
-	}
 
-	$conn = $pdo->open();
 
-	$stmt = $conn->prepare("SELECT * FROM student WHERE Student_ID=:Student_ID");
-	$stmt->execute(['Student_ID'=>$_SESSION['admin']]);
-	$admin = $stmt->fetch();
+if (!function_exists('logged_in')) {
+    function logged_in() {
+        return isset($_SESSION['Student_ID']);
+    }
+}
 
-	$pdo->close();
+if(!function_exists('confirm_logged_in')){
+    function confirm_logged_in() {
+    if(isset($_SESSION['Student_ID']) && !empty($_SESSION['Student_ID'])) {
+        // User is logged in
+        return true;
+    } else {
+        // User is not logged in
+        header('Location: signin.php'); // Redirect to signin page
+        exit();
+    }
+}
+
+}
+
+
 
 ?>

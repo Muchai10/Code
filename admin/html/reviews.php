@@ -1,17 +1,4 @@
 <!DOCTYPE html>
-
-<!-- =========================================================
-* Sneat - Bootstrap 5 HTML Admin Template - Pro | v1.0.0
-==============================================================
-
-* Product Page: https://themeselection.com/products/sneat-bootstrap-html-admin-template/
-* Created by: ThemeSelection
-* License: You must have a valid license purchased in order to legally use the theme for your project.
-* Copyright ThemeSelection (https://themeselection.com)
-
-=========================================================
- -->
-<!-- beautify ignore:start -->
 <html
   lang="en"
   class="light-style layout-menu-fixed"
@@ -27,12 +14,12 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Without menu - Layouts | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>Reports</title>
 
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico" />
+    <!-- <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico" /> -->
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -65,8 +52,76 @@
 
   <body>
     <!-- Layout wrapper -->
-    <div class="layout-wrapper layout-content-navbar layout-without-menu">
+    <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
+        <!-- Menu -->
+
+        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+          <div class="app-brand demo">
+            <a href="index.php" class="app-brand-link">
+              
+              <span class="app-brand-text demo menu-text">Café La Sala</span>
+            </a>
+
+            <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+              <i class="bx bx-chevron-left bx-sm align-middle"></i>
+            </a>
+          </div>
+
+          <div class="menu-inner-shadow"></div>
+
+          <ul class="menu-inner py-1">
+            <!-- Dashboard -->
+            <li class="menu-item">
+              <a href="index.php" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <div data-i18n="Analytics">Dashboard</div>
+              </a>
+            </li>
+                        
+            <!-- Components -->
+            <!-- <li class="menu-header small text-uppercase"><span class="menu-header-text">Components</span></li> -->
+            <li class="menu-header small text-uppercase">
+              <span class="menu-header-text">Manage</span>
+            </li>
+            <!-- Tables -->
+            <li class="menu-item">
+              <a href="students.php" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-table"></i>
+                <div data-i18n="Tables">Students</div>
+              </a>
+            </li>
+
+            <!-- Cards -->
+            <li class="menu-item">
+              <a href="food.php" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <div data-i18n="Basic">Food Items</div>
+              </a>
+            </li>
+
+            <li class="menu-header small text-uppercase">
+              <span class="menu-header-text">Reports</span>
+            </li>
+
+            <li class="menu-item">
+              <a href="sales.php" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-cube-alt"></i>
+                <div data-i18n="User interface">Sales</div>
+              </a>
+            </li>
+
+            <li class="menu-item">
+              <a href="reviews.php" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-box"></i>
+                <div data-i18n="User interface">Reviews</div>
+              </a>
+            </li>
+
+          </ul>
+        </aside>
+        <!-- / Menu -->
+
         <!-- Layout container -->
         <div class="layout-page">
           <!-- Navbar -->
@@ -75,6 +130,12 @@
             class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
             id="layout-navbar"
           >
+            <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+              <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                <i class="bx bx-menu bx-sm"></i>
+              </a>
+            </div>
+
             <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
               <!-- Search -->
               <div class="navbar-nav align-items-center">
@@ -91,24 +152,11 @@
               <!-- /Search -->
 
               <ul class="navbar-nav flex-row align-items-center ms-auto">
-                <!-- Place this tag where you want the button to render. -->
-                <li class="nav-item lh-1 me-3">
-                  <a
-                    class="github-button"
-                    href="https://github.com/themeselection/sneat-html-admin-template-free"
-                    data-icon="octicon-star"
-                    data-size="large"
-                    data-show-count="true"
-                    aria-label="Star themeselection/sneat-html-admin-template-free on GitHub"
-                    >Star</a
-                  >
-                </li>
-
                 <!-- User -->
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                      <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                      <img src="../assets/img/avatars/profile.png" alt class="w-px-40 h-auto rounded-circle" />
                     </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
@@ -117,11 +165,11 @@
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
-                              <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                              <img src="../assets/img/avatars/profile.png" alt class="w-px-40 h-auto rounded-circle" />
                             </div>
                           </div>
                           <div class="flex-grow-1">
-                            <span class="fw-semibold d-block">John Doe</span>
+                            <span class="fw-semibold d-block">Peter Kitale</span>
                             <small class="text-muted">Admin</small>
                           </div>
                         </div>
@@ -142,7 +190,7 @@
                         <span class="align-middle">Settings</span>
                       </a>
                     </li>
-                    <li>
+                    <!-- <li>
                       <a class="dropdown-item" href="#">
                         <span class="d-flex align-items-center align-middle">
                           <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
@@ -150,7 +198,7 @@
                           <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
                         </span>
                       </a>
-                    </li>
+                    </li> -->
                     <li>
                       <div class="dropdown-divider"></div>
                     </li>
@@ -174,23 +222,67 @@
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
-              <!-- Layout Demo -->
-              <div class="layout-demo-wrapper">
-                <div class="layout-demo-placeholder">
-                  <img
-                    src="../assets/img/layouts/layout-without-menu-light.png"
-                    class="img-fluid"
-                    alt="Layout without menu"
-                    data-app-light-img="layouts/layout-without-menu-light.png"
-                    data-app-dark-img="layouts/layout-without-menu-dark.png"
-                  />
-                </div>
-                <div class="layout-demo-info">
-                  <h4>Layout without Menu (Navigation)</h4>
-                  <button class="btn btn-primary" type="button" onclick="history.back()">Go Back</button>
+              <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"><span>Reviews</span></h4>
+
+              <!-- Bordered Table -->
+              <div class="card">
+                <h5 class="card-header"></h5>
+                <div class="card-body">
+                  <div class="table-responsive text-nowrap">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>Student ID</th>
+                          <th>Rating</th>
+                          <th>Wait Time</th>
+                          <th>Review Description</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php          
+                            include_once "PHP/config.php";
+                            $sql="SELECT * from reviews";
+                            $result=$conn-> query($sql);
+                            $count=1;
+                            if ($result-> num_rows > 0){
+                            while ($row=$result-> fetch_assoc()) {
+           
+                        ?>
+                        <tr>
+                          <td><?=$row["Review_ID"]?></td>
+                          <td><?=$row["Student_ID"]?></td>
+                          <td><?=$row["Rating"]?></td>
+                          <td><?=$row["Wait_Time"]?></td>
+                          <td><?=$row["Review_description"]?></td>
+    
+                        <?php
+                              $count=$count+1;
+                              
+                          }
+                          }
+                        ?>
+                        </tr>
+                        
+                         
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
-              <!--/ Layout Demo -->
+
+              <br>
+
+                <button type="button" class="btn btn-primary" style="height:40px" onclick="window.print()">
+                Print Report
+              </button>
+
+
+              <!--/ Bordered Table -->
+
+              <hr class="my-5" />
+
+              
             </div>
             <!-- / Content -->
 
@@ -198,52 +290,25 @@
             <footer class="content-footer footer bg-footer-theme">
               <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
                 <div class="mb-2 mb-md-0">
-                  ©
+                  © Copyright
                   <script>
                     document.write(new Date().getFullYear());
                   </script>
-                  , made with ❤️ by
-                  <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">ThemeSelection</a>
-                </div>
-                <div>
-                  <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
-                  <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
-
-                  <a
-                    href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                    target="_blank"
-                    class="footer-link me-4"
-                    >Documentation</a
-                  >
-
-                  <a
-                    href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                    target="_blank"
-                    class="footer-link me-4"
-                    >Support</a
-                  >
                 </div>
               </div>
             </footer>
             <!-- / Footer -->
-
             <div class="content-backdrop fade"></div>
           </div>
           <!-- Content wrapper -->
         </div>
         <!-- / Layout page -->
       </div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
     </div>
     <!-- / Layout wrapper -->
-
-    <div class="buy-now">
-      <a
-        href="https://themeselection.com/products/sneat-bootstrap-html-admin-template/"
-        target="_blank"
-        class="btn btn-danger btn-buy-now"
-        >Upgrade to Pro</a
-      >
-    </div>
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
@@ -261,7 +326,8 @@
     <script src="../assets/js/main.js"></script>
 
     <!-- Page JS -->
-
+    <script type="text/javascript" src="./assets/js/ajaxWork.js"></script>    
+    <script type="text/javascript" src="./assets/js/script.js"></script>
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
   </body>

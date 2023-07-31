@@ -27,7 +27,7 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Dashboard</title>
+    <title>Students</title>
 
     <meta name="description" content="" />
 
@@ -53,8 +53,6 @@
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
 
-    <link rel="stylesheet" href="../assets/vendor/libs/apex-charts/apex-charts.css" />
-
     <!-- Page CSS -->
 
     <!-- Helpers -->
@@ -66,9 +64,6 @@
   </head>
 
   <body>
-        <?php          
-            include_once "PHP/config.php";
-        ?>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
@@ -76,8 +71,8 @@
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-            <a href="index.php" class="app-brand-link">
-              <!-- <img src="../assets/img/favicon/logo1.png" alt=""> -->
+            <a href="index.html" class="app-brand-link">
+              
               <span class="app-brand-text demo menu-text">Café La Sala</span>
             </a>
 
@@ -88,7 +83,6 @@
 
           <div class="menu-inner-shadow"></div>
 
-          
           <ul class="menu-inner py-1">
             <!-- Dashboard -->
             <li class="menu-item">
@@ -96,8 +90,6 @@
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
               </a>
-            </li>
-
             </li>
                         
             <!-- Components -->
@@ -244,200 +236,137 @@
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
-              <div class="row">
-                
-              <!-- Dashboard -->
-              <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"><span>Dashboard</span></h4>
+              <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"><span>Edit Student</span></h4>
 
-              <div class="row mb-5">
-                <div class="col-md-6 col-lg-4">
-                  <div class="card mb-3">
+              <div class="col-xl-6">
+                <!-- HTML5 Inputs -->
+                <div class="card mb-4">
+                    <!-- <h5 class="card-header">HTML5 Inputs</h5> -->
                     <div class="card-body">
-                      <h5 class="card-title">Total No. Of Students</h5>
-                      <h5>
-                        <?php
-                            $sql="SELECT * from student";
-                            $result=$conn-> query($sql);
-                            $count=0;
-                            if ($result-> num_rows > 0){
-                                while ($row=$result-> fetch_assoc()) {
-                        
-                                    $count=$count+1;
-                                }
-                            }
-                            echo $count;
-                        ?></h5>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                  <div class="card mb-3">
-                    <div class="card-body">
-                      <h5 class="card-title">Total No. of Food Items</h5>
-                      <h5>
-                        <?php
-                            $sql="SELECT * from food";
-                            $result=$conn-> query($sql);
-                            $count=0;
-                            if ($result-> num_rows !=0 ){
-                                while ($row=$result-> fetch_assoc()) {
-                        
-                                    $count=$count+1;
-                                }
-                            }
-                            echo $count;
-                        ?></h5>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                  <div class="card mb-3">
-                    <div class="card-body">
-                      <h5 class="card-title">Total No. Of Orders</h5>
-                      <h5>
-                        <?php
-                            $sql="SELECT * from orders";
-                            $result=$conn-> query($sql);
-                            $count=0;
-                            if ($result-> num_rows !=0 ){
-                                while ($row=$result-> fetch_assoc()) {
-                        
-                                    $count=$count+1;
-                                }
-                            }
-                            echo $count;
-                        ?></h5>
-                    </div>
-                  </div>
-                </div>
-              </div>
 
-               <!-- <button type="button" class="btn btn-primary" style="height:40px" onclick="window.print()">
-                Print Report
-              </button> -->
-              <!--/ Text alignment -->
+                    <?php
+                      include_once "PHP/config.php";
+                      if(isset($_GET['editid'])){
+                        $id = mysqli_real_escape_string($conn, $_GET['editid']);
+                        $query = "SELECT * FROM student WHERE Student_ID = '$id'";
+                        $query_run = mysqli_query($conn, $query);
 
-                <!-- Transactions -->
-                <!-- <div class="col-md-6 col-lg-4 order-2 mb-4">
-                  <div class="card h-100">
-                    <div class="card-header d-flex align-items-center justify-content-between">
-                      <h5 class="card-title m-0 me-2">Transactions</h5>
-                      <div class="dropdown">
-                        <button
-                          class="btn p-0"
-                          type="button"
-                          id="transactionID"
-                          data-bs-toggle="dropdown"
-                          aria-haspopup="true"
-                          aria-expanded="false"
-                        >
-                          <i class="bx bx-dots-vertical-rounded"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
-                          <a class="dropdown-item" href="javascript:void(0);">Last 28 Days</a>
-                          <a class="dropdown-item" href="javascript:void(0);">Last Month</a>
-                          <a class="dropdown-item" href="javascript:void(0);">Last Year</a>
+                        if(mysqli_num_rows($query_run) > 0){
+                          $student = mysqli_fetch_array($query_run);
+                          ?>
+                        
+                      <form  enctype='multipart/form-data' method="POST">
+                        <input type="hidden" name="s_id" id="s_id" value="<?=$student; ?>">
+                        <div class="mb-3 row">
+                          <label for="fname" class="col-md-2 col-form-label">First Name</label>
+                          <div class="col-md-10">
+                          <input type="text" class="form-control" name="First_Name" id="First_Name" value="<?=$student['First_Name']; ?>" required>
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                    <div class="card-body">
-                      <ul class="p-0 m-0">
-                        <li class="d-flex mb-4 pb-1">
-                          <div class="avatar flex-shrink-0 me-3">
-                            <img src="../assets/img/icons/unicons/paypal.png" alt="User" class="rounded" />
+                        <div class="mb-3 row">
+                          <label for="lname" class="col-md-2 col-form-label">Last Name</label>
+                          <div class="col-md-10">
+                          <input type="text" class="form-control" name="l_name" id="l_name" value="<?=$student['Last_Name']; ?>" required>
                           </div>
-                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                              <small class="text-muted d-block mb-1">Paypal</small>
-                              <h6 class="mb-0">Send money</h6>
-                            </div>
-                            <div class="user-progress d-flex align-items-center gap-1">
-                              <h6 class="mb-0">+82.6</h6>
-                              <span class="text-muted">USD</span>
-                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                          <label for="password" class="col-md-2 col-form-label">Password</label>
+                          <div class="col-md-10">
+                          <input type="password" class="form-control" name="password" id="password"  value="<?=$student['Password']; ?>" required>
                           </div>
-                        </li>
-                        <li class="d-flex mb-4 pb-1">
-                          <div class="avatar flex-shrink-0 me-3">
-                            <img src="../assets/img/icons/unicons/wallet.png" alt="User" class="rounded" />
+                        </div>
+                        <div class="mb-3 row">
+                          <label for="cpassword" class="col-md-2 col-form-label">Confirm Password</label>
+                          <div class="col-md-10">
+                          <input type="password" class="form-control" name="cpassword" id="cpassword" value="<?=$student['Confirm_Password']; ?>" required>
                           </div>
-                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                              <small class="text-muted d-block mb-1">Wallet</small>
-                              <h6 class="mb-0">Mac'D</h6>
-                            </div>
-                            <div class="user-progress d-flex align-items-center gap-1">
-                              <h6 class="mb-0">+270.69</h6>
-                              <span class="text-muted">USD</span>
-                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                          <label for="email" class="col-md-2 col-form-label">Email</label>
+                          <div class="col-md-10">
+                          <input type="text" class="form-control" name="email" id="email" value="<?=$student['Email_Address']; ?>" required>
                           </div>
-                        </li>
-                        <li class="d-flex mb-4 pb-1">
-                          <div class="avatar flex-shrink-0 me-3">
-                            <img src="../assets/img/icons/unicons/chart.png" alt="User" class="rounded" />
+                        </div>
+                        <div class="mb-3 row">
+                          <label for="meal_plan" class="col-md-2 col-form-label">Meal Plan</label>
+                          <div class="col-md-10">
+                          <input type="text" class="form-control" name="meal_plan" id="meal_plan" value="<?=$student['Meal_plan']; ?>" required>
                           </div>
-                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                              <small class="text-muted d-block mb-1">Transfer</small>
-                              <h6 class="mb-0">Refund</h6>
-                            </div>
-                            <div class="user-progress d-flex align-items-center gap-1">
-                              <h6 class="mb-0">+637.91</h6>
-                              <span class="text-muted">USD</span>
-                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                          <label for="phonenumber" class="col-md-2 col-form-label">Phone</label>
+                          <div class="col-md-10">
+                          <input type="number" class="form-control" name="phonenumber" id="phonenumber" value="<?=$student['Phone_Number']; ?>" required>
                           </div>
-                        </li>
-                        <li class="d-flex mb-4 pb-1">
-                          <div class="avatar flex-shrink-0 me-3">
-                            <img src="../assets/img/icons/unicons/cc-success.png" alt="User" class="rounded" />
-                          </div>
-                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                              <small class="text-muted d-block mb-1">Credit Card</small>
-                              <h6 class="mb-0">Ordered Food</h6>
-                            </div>
-                            <div class="user-progress d-flex align-items-center gap-1">
-                              <h6 class="mb-0">-838.71</h6>
-                              <span class="text-muted">USD</span>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="d-flex mb-4 pb-1">
-                          <div class="avatar flex-shrink-0 me-3">
-                            <img src="../assets/img/icons/unicons/wallet.png" alt="User" class="rounded" />
-                          </div>
-                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                              <small class="text-muted d-block mb-1">Wallet</small>
-                              <h6 class="mb-0">Starbucks</h6>
-                            </div>
-                            <div class="user-progress d-flex align-items-center gap-1">
-                              <h6 class="mb-0">+203.33</h6>
-                              <span class="text-muted">USD</span>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="d-flex">
-                          <div class="avatar flex-shrink-0 me-3">
-                            <img src="../assets/img/icons/unicons/cc-warning.png" alt="User" class="rounded" />
-                          </div>
-                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                              <small class="text-muted d-block mb-1">Mastercard</small>
-                              <h6 class="mb-0">Ordered Food</h6>
-                            </div>
-                            <div class="user-progress d-flex align-items-center gap-1">
-                              <h6 class="mb-0">-92.45</h6>
-                              <span class="text-muted">USD</span>
-                            </div>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
+                        </div>
+                        
+                        <br>
+                        <div class="mb-3">                      
+                              <button type="submit" class="btn btn btn-primary" name="edit" id="edit" style="height:40px">Save Changes</button> &nbsp; &nbsp; &nbsp;
+                              <button type="button" class="btn btn-danger" style="height:40px"><a href="students.php" class="text-white">
+                              Go Back
+                              </a>
+                            </button>
+                        </div>
+                              <div class="form-group">
+                              
+                              </div>
+                              
+                        </form>
+                      
+                    
+                    
+                  
+                  <?php
+                        }
+                        else{
+                          echo "<h4>No Such Id found.</h4>";
+                        }
+                      }
+                    ?>
+                </div>
+
                   </div>
-                </div> -->
-                <!--/ Transactions -->
-              </div>
+                  <br><br><br><br><br><br><br><br>
+                
+                  <?php
+                    if(isset($_POST['edit']))
+                    {
+                        $id = mysqli_real_escape_string($conn,$_POST['s_id']);
+                        $fname = mysqli_real_escape_string($conn,$_POST['First_Name']);
+                        $lname = mysqli_real_escape_string($conn,$_POST['l_name']);
+                        $password = mysqli_real_escape_string($conn,$_POST['password']);
+                        $cpassword = mysqli_real_escape_string($conn,$_POST['cpassword']);
+                        $email = mysqli_real_escape_string($conn,$_POST['email']);
+                        $mealplan = mysqli_real_escape_string($conn,$_POST['meal_plan']);
+                        $phonenumber = mysqli_real_escape_string($conn,$_POST['phonenumber']);               
+                         
+                        $passwordmd5 = md5($password);
+                        $cpasswordmd5 = md5($cpassword);            
+                         
+                        $insert = mysqli_query($conn,"UPDATE student SET First_Name = '$fname',Last_Name = '$lname',Password = '$passwordmd5',Confirm_Password = '$cpasswordmd5',Email_Address = '$email',Meal_plan = '$mealplan',Phone_Number = '$phonenumber' WHERE Student_ID = '$id'");
+                        $query = mysqli_query($conn,$insert);
+
+                        if(!$query)
+                        {
+                          //echo '<script>alert("Connection error") </script>';
+                            echo mysqli_error($conn);
+                        }
+                        else
+                        {  
+                          if($passwordmd5 != $cpasswordmd5){
+                              echo '<script> alert("Passwords Do Not Match") </script>';
+                          }
+                          else{                    
+                              echo '<script> alert("Successful") </script>';
+                              //header('location:students.php');
+                          }  
+                        }
+                    
+                    }     
+                  ?>
+                  
+
             </div>
             <!-- / Content -->
 
@@ -453,7 +382,6 @@
               </div>
             </footer>
             <!-- / Footer -->
-
             <div class="content-backdrop fade"></div>
           </div>
           <!-- Content wrapper -->
@@ -467,6 +395,7 @@
     <!-- / Layout wrapper -->
 
     <!-- Core JS -->
+    
     <!-- build:js assets/vendor/js/core.js -->
     <script src="../assets/vendor/libs/jquery/jquery.js"></script>
     <script src="../assets/vendor/libs/popper/popper.js"></script>
@@ -477,13 +406,11 @@
     <!-- endbuild -->
 
     <!-- Vendors JS -->
-    <script src="../assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
     <!-- Main JS -->
     <script src="../assets/js/main.js"></script>
 
     <!-- Page JS -->
-    <script src="../assets/js/dashboards-analytics.js"></script>
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>

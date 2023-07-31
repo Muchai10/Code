@@ -1,6 +1,6 @@
 <?php
 include("PHP/config.php");
-session_start();
+include("PHP/session.php");
 
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = array();
@@ -101,8 +101,8 @@ if (!isset($_SESSION['cart'])) {
                                   Services
                               </a>
                               <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-                                  <a class="dropdown-item" href="tracking.html"> Tracking</a>
-                                  <a class="dropdown-item" href="checkout.html"> Checkout</a>
+                                  <a class="dropdown-item" href="tracking.php"> Tracking</a>
+                                  <!-- <a class="dropdown-item" href="checkout.html"> Checkout</a> -->
                                   <a class="dropdown-item" href="confirmation.html"> Confirmation</a>
                               </div>
                           </li>
@@ -115,34 +115,104 @@ if (!isset($_SESSION['cart'])) {
                       </ul>
                   </div>
                   <div class="hearer_icon d-flex">
-                      
-                      <a href="signin.php" class="btn_3">
-                          Log Out
-                      </a>
-                        
-                          <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                              <div class="single_product">
+                            <?php
+                               if (isset($_SESSION['Student_ID'])) {
+                                $id = $_SESSION['Student_ID'];
+                            
+                                $query = mysqli_query($conn, "SELECT * FROM student WHERE Student_ID='$id'") or die("Select Error");
+                                $fetch = mysqli_fetch_array($query);
+                            
+                                // Rest of the code that uses $fetch array
+                                } else {
+                                    // Handle the case when Student_ID is not set in the session
+                                    echo "Student ID not found in the session.";
+                                }
+                            ?>
 
-                              </div>
-                          </div> -->
-                          
-                      </div>
-                  </div>
-              </nav>
-          </div>
-      </div>
-  </div>
-  <div class="search_input" id="search_input_box">
-      <div class="container ">
-          <form class="d-flex justify-content-between search-inner">
-              <input type="text" class="form-control" id="search_input" placeholder="Search Here">
-              <button type="submit" class="btn"></button>
-              <span class="ti-close" id="close_search" title="Close Search"></span>
-          </form>
-      </div>
-  </div>
-</header>
-  <!-- Header part end-->
+                            
+                                    <ul>
+                                    <!-- <a href="signin.php" class="btn_3"> -->
+                                    <button type="button" class="btn_3" style="height:40px" data-toggle="modal" data-target="#myProfile">
+                                        My Profile
+                                    </button>
+                                        <!-- <li>Welcome:<a href="#profile" href  data-toggle="modal"><i class="icon-user icon-white"></i><?php //echo $fetch['First_Name']; ?>&nbsp;<?php //echo $fetch['Last_Name'];?></a></li> -->
+                                    </ul>
+                                    
+                                    
+                            
+                              
+                                <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <div class="single_product">
+    
+                                    </div>
+                                </div> -->
+                                
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="search_input" id="search_input_box">
+            <div class="container ">
+                <form class="d-flex justify-content-between search-inner">
+                    <input type="text" class="form-control" id="search_input" placeholder="Search Here">
+                    <button type="submit" class="btn"></button>
+                    <span class="ti-close" id="close_search" title="Close Search"></span>
+                </form>
+            </div>
+        </div> -->
+                                  
+    </header>
+                <!-- Modal -->
+                <div class="modal fade" id="myProfile" role="dialog">
+                    <div class="modal-dialog">
+                    
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h4 class="modal-title">My Profile</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <?php
+                                $id = $_SESSION['Student_ID'];
+                            
+                                $query = mysqli_query($conn, "SELECT * FROM student WHERE Student_ID='$id'") or die("Select Error");
+                                $fetch = mysqli_fetch_array($query);
+                            ?>
+
+                        <form  enctype='multipart/form-data' method="POST">
+                            <center>
+							<table>
+                                <tr>
+									<td class="profile">Student ID:</td><td class="profile">&nbsp;<?php echo $fetch['Student_ID'];?></td>
+								</tr>
+								<tr>
+									<td class="profile">Name:</td><td class="profile">&nbsp;<?php echo $fetch['First_Name'];?>&nbsp;<?php echo $fetch['Last_Name'];?></td>
+								</tr>
+								<tr>
+									<td class="profile">Email Address:</td><td class="profile">&nbsp;<?php echo $fetch['Email_Address'];?></td>
+								</tr>								
+								<tr>
+									<td class="profile">Phone Number:</td><td class="profile">&nbsp;<?php echo $fetch['Phone_Number'];?></td>
+								</tr>
+							</table>
+						</center>
+
+                        </div>
+                        <div class="modal-footer">
+                        <a href="account.php?id=<?php echo $fetch['Student_ID']; ?>"><input type="button" class="btn btn-success" name="edit" value="Edit Account"></a>
+                        <a href="signin.php"><input type="button" class="btn btn-danger" name="" value="Log Out"></a>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" style="height:40px">Close</button>
+                        </div>
+                    </div>
+                    
+                    </div>
+                </div>
+
+    <!-- Header part end-->
+
 
 
   <!--================Home Banner Area =================-->
@@ -241,8 +311,8 @@ if (!isset($_SESSION['cart'])) {
                     echo "<td><input type='hidden' required value='".$qty."' name='qty[]' onchange='updateQty($id, this.value)'></td>";
                     echo "<td>".$price."</td>";
                     //echo "<td><a href='cart.php?id=".$id."&qty=".($qty + 1)."'><i class='icon-plus-sign'> + </i></a></td>";
-                    echo "<td><a href='cart.php?id=".$id."&action=add'><i class='icon-plus-sign'> + </i></a></td>";
-                    echo "<td><a href='cart.php?id=".$id."&action=remove'><i class='icon-minus-sign'> - </i></a></td>";
+                    echo "<td><a href='cart2.php?id=".$id."&action=add'><i class='icon-plus-sign'> + </i></a></td>";
+                    echo "<td><a href='cart2.php?id=".$id."&action=remove'><i class='icon-minus-sign'> - </i></a></td>";
                     echo "<td><strong>P ".$line_cost."</strong></td>";
                     echo "</tr>";
                     }
@@ -254,7 +324,7 @@ if (!isset($_SESSION['cart'])) {
                   echo "<td><strong>TOTAL:</strong></td>";
                   echo "<td>><input type='hidden' required value='".$total."' name='total'><strong>P ".$total."</strong></td>";
                   echo "<td></td>";
-                  echo "<td><a class='btn btn-danger btn-sm pull-right' href='cart.php?id=".$id."&action=empty'><i class='fa fa-trash-o'></i> Empty cart</a></td>";		
+                  echo "<td><a class='btn btn-danger btn-sm pull-right' href='cart2.php?id=".$id."&action=empty'><i class='fa fa-trash-o'></i> Empty cart</a></td>";		
                   echo "</tr>";
                 
               } else {
@@ -281,77 +351,25 @@ if (!isset($_SESSION['cart'])) {
                 </script>
 
               </table>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#purchase">Mode of Payment</button>
               <div class="checkout_btn_inner float-right">
                 <a class="btn_1" href="category.php">Continue Shopping</a>
-                <a class="btn_1 checkout_btn_1" href="#">Proceed to checkout</a>
-              </div>
-
-              <!-- <div class='pull-right'>
-                  <a href='home.php' class='btn btn-inverse'>Continue Shopping</a>
-                  <button name="place_order" type="submit" class="btn btn-inverse" onclick="alert('Thank you for your purchase, You will be contacted when your order is approved!')">Purchase</button>
+                <!-- <a class="btn_1 checkout_btn_1" href="checkout.php">Proceed to checkout</a> -->
+              
+                  <!-- <a href='home.php' class='btn btn-inverse'>Continue Shopping</a> -->
+                  <button name="" type="submit" class="btn_1" onclick="alert('Thank you for your purchase, You will be contacted when your order is approved!')">Place Order</button>
               
                   <?php //echo '<button name="total" type="submit" class="btn btn-inverse btn-lg" >Purchase</button>';
 
                   ?>
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#purchase">Purchase mode</button>
+                  
 
-              </form>
-            </div> -->
-
-
-            <!-- Modal -->
-            <div id="purchase" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width:400px;">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h3 id="myModalLabel">Select Payment Method</h3>
-              </div>
-              <div class="modal-body">
-                <form method="post" action="function/place_order.php">
-                  <center>
-                    <label for="mpesa-reference">M-Pesa Transaction Reference:</label>
-                    <input type="text" id="mpesa-reference" name="mpesa_reference" placeholder="Enter M-Pesa transaction reference">
-                    <br>
-                    <br>
-                
-                    <button name="place_order" type="button" class="btn btn-lg btn-primary" onclick="submitMpesa()">M-Pesa</button>
-                    <button name="place_order" type="button" class="btn btn-lg btn-success" onclick="submitCash()">Cash</button>
-                  </center>
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Close</button>
-              </div>
-            </div>
-          <script>
-            function submitMpesa() {
-              var reference = document.getElementById("mpesa-reference").value;
-              if (reference) {
-              // Check if payment method is M-Pesa
-              if (isset($_POST['mpesa']) && $_POST['mpesa'] == "true") {
-                    // Get the reference number
-                    $reference = $_POST['reference'];
-                    // Insert the transaction with the reference number
-                    $query = mysqli_query($conn, "INSERT INTO `transaction` ( payment) VALUES ('$reference')") or die(mysqli_error($conn));
-                  } else {
-                    // Insert the transaction with cash on delivery payment method
-                    $query = mysqli_query($conn, "INSERT INTO `transaction` (payment) VALUES ('cash on delivery')") or die(mysqli_error($conn));
-                  }
-                alert("Payment received via M-Pesa with reference number " + reference);
-              } else {
-                alert("Please enter the M-Pesa transaction reference number.");
-              }
-            }
-
-            function submitCash() {
-              alert("Payment will be done after delivery.");
-            }
-          </script>
-
-                
-                
+            </form>
+              </div> 
+           
               <br />		
               <br />	
-          </div>
+        
 
              <!-- <section class="cart_area padding_top">
                 <div class="container">
@@ -407,8 +425,8 @@ if (!isset($_SESSION['cart'])) {
                   <h5>$360.00</h5>
                 </td>
                 <td>
-                  <div class="product_count"> --> 
-                    <!-- <input type="text" value="1" min="0" max="10" title="Quantity:"
+                  <div class="product_count">
+                    <input type="text" value="1" min="0" max="10" title="Quantity:"
                       class="input-text qty input-number" />
                     <button
                       class="increase input-number-increment items-count" type="button">
@@ -417,8 +435,8 @@ if (!isset($_SESSION['cart'])) {
                     <button
                       class="reduced input-number-decrement items-count" type="button">
                       <i class="ti-angle-down"></i>
-                    </button> -->
-                    <!-- <span class="input-number-decrement"> <i class="ti-angle-down"></i></span>
+                    </button> 
+                    <span class="input-number-decrement"> <i class="ti-angle-down"></i></span>
                     <input class="input-number" type="text" value="1" min="0" max="10">
                     <span class="input-number-increment"> <i class="ti-angle-up"></i></span>
                   </div>
@@ -473,8 +491,8 @@ if (!isset($_SESSION['cart'])) {
                 <td>
                   <h5>$2160.00</h5>
                 </td>
-              </tr>
-              <tr class="shipping_area">
+              </tr> -->
+              <!-- <tr class="shipping_area">
                 <td></td>
                 <td></td>
                 <td>
@@ -521,8 +539,10 @@ if (!isset($_SESSION['cart'])) {
         </div>
       </div>
     </div>
-  </section> 
+  </section>  -->
+
   <!--================End Cart Area =================-->
+  
 <br>
 <br>
 <br>
@@ -613,6 +633,53 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 </footer>
   <!--::footer_part end::-->
 
+                <!-- Modal -->
+                <div class="modal fade" id="purchase" role="dialog">
+                    <div class="modal-dialog">
+                    
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h4 class="modal-title">Select Mode of Payment</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                        <form  enctype='multipart/form-data' method="POST">
+                            <!-- <div class="form-group">
+                            <label for="id">ID:</label>
+                            <input type="number" class="form-control" name="p_id" id="p_id" required>
+                            </div> -->
+                            <div class="form-group">
+                            <label for="name">Mode of Payment:</label>
+                            <input type="text" class="form-control" name="p_name" id="p_name" required>
+                            </div>
+                            <div class="form-group">
+                            <label for="price">Reference Code:</label>
+                            <input type="number" class="form-control" name="quantity" id="quantity" required>
+                            </div>
+                            <div class="form-group">
+                            <label for="price">Amount Paid:</label>
+                            <input type="number" class="form-control" name="p_price" id="p_price" required>
+                            </div>
+                            
+                            <br>
+                            <div class="form-group">
+                            <input type="submit" class="btn btn btn-primary" name="add" id="add" value="Done">
+                            <!-- <button type="submit" class="btn btn btn-primary" name="upload" id="upload" style="height:40px">Add Item</button> -->
+                            </div>
+                        </form>
+
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" style="height:40px">Close</button>
+                        </div>
+                    </div>
+                    
+                    </div>
+                </div>
+
+  
+
   <!-- jquery plugins here-->
   <!-- jquery -->
   <script src="js/jquery-1.12.1.min.js"></script>
@@ -643,5 +710,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
   <!-- custom js -->
   <script src="js/custom.js"></script>
 </body>
+
 
 </html>

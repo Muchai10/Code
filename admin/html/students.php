@@ -119,25 +119,19 @@
             </li>
 
             <li class="menu-item">
-              <a href="reports.php" class="menu-link">
+              <a href="sales.php" class="menu-link">
               <i class="menu-icon tf-icons bx bx-cube-alt"></i>
                 <div data-i18n="User interface">Sales</div>
               </a>
             </li>
 
             <li class="menu-item">
-              <a href="reports.php" class="menu-link">
+              <a href="reviews.php" class="menu-link">
               <i class="menu-icon tf-icons bx bx-box"></i>
                 <div data-i18n="User interface">Reviews</div>
               </a>
             </li>
 
-            <li class="menu-item">
-              <a href="reports.php" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-file"></i>
-                <div data-i18n="User interface">Reports</div>
-              </a>
-            </li>
           </ul>
         </aside>
         <!-- / Menu -->
@@ -260,7 +254,7 @@
                           <th>Email Address</th>
                           <th>Meal Plan</th>
                           <th>Phone Number</th>
-                          <th>Action</th>
+                          <th colspan="2">Action</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -340,31 +334,30 @@
                           <td><?=$row["Email_Address"]?></td>
                           <td><?=$row["Meal_plan"]?></td>
                           <td><?=$row["Phone_Number"]?></td>
+                          <td>
+                          <!-- <button type="button" class="btn btn-success" style="height:40px" data-bs-toggle="modal" data-bs-target="#editModal">
+                            Edit
+                          </button> -->
+                          <button type="button" class="btn btn-success" style="height:40px"><a href="edit.php?editid=<?php echo $row['Student_ID']?>" class="text-white">
+                            Edit
+                            </a>
+                          </button>
+                          </td>
+                          <td> 
+                          <!-- <button type="button" class="btn btn-danger" style="height:40px" data-bs-toggle="modal" data-bs-target="#myModal">
+                            Delete
+                          </button> -->
+                          <button type="button" class="btn btn-danger" style="height:40px"><a href="PHP/delete.php?deleteid=<?php echo $row['Student_ID']?>" class="text-white">
+                            Delete
+                            </a>
+                          </button>
+                          </td>
                         <?php
                               $count=$count+1;
                               
                           }
                           }
-                        ?>
-                          <td>
-                            <div class="dropdown">
-                              <button
-                                type="button"
-                                class="btn p-0 dropdown-toggle hide-arrow"
-                                data-bs-toggle="dropdown"
-                              >
-                                <i class="bx bx-dots-vertical-rounded"></i>
-                              </button>
-                              <div class="dropdown-menu">
-                                <a class="dropdown-item" href="javascript:void(0);"
-                                  ><i class="bx bx-edit-alt me-1"></i> Edit</a
-                                >
-                                <a class="dropdown-item" href="javascript:void(0);"
-                                  ><i class="bx bx-trash me-1"></i> Delete</a
-                                >
-                              </div>
-                            </div>
-                          </td>
+                        ?>                         
                         </tr>
                         
                          
@@ -374,12 +367,185 @@
                 </div>
               </div>
               <br>
+
+<!-- ################################## Add Student Modal #################################################### -->
               <button type="button" class="btn btn-primary" style="height:40px" data-bs-toggle="modal" data-bs-target="#myModal">
                 Add Student
               </button>
               <!-- <button type="button" class="btn btn-primary" style="height:40px" onclick="window.print()">
                 Print Report
               </button> -->
+
+              <!-- Modal -->
+              <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog">
+                    
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h4 class="modal-title">New Student</h4>
+                        <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                        <form  enctype='multipart/form-data' method="POST">
+                            <div class="form-group">
+                            <label for="id">Student ID:</label>
+                            <input type="text" class="form-control" name="s_id" id="s_id" required>
+                            </div>
+                            <div class="form-group">
+                            <label for="fname">First Name:</label>
+                            <input type="text" class="form-control" name="f_name" id="f_name" required>
+                            </div>
+                            <div class="form-group">
+                            <label for="lname">Last Name:</label>
+                            <input type="text" class="form-control" name="l_name" id="l_name" required>
+                            </div>
+                            <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="password" class="form-control" name="password" id="password" required>
+                            </div>
+                            <div class="form-group">
+                            <label for="cpassword">Confirm Password:</label>
+                            <input type="password" class="form-control" name="cpassword" id="cpassword" required>
+                            </div>
+                            <div class="form-group">
+                            <label for="email">Email Address:</label>
+                            <input type="text" class="form-control" name="email" id="email" required>
+                            </div>
+                            <div class="form-group">
+                            <label for="meal_plan">Meal Plan:</label>
+                            <input type="text" class="form-control" name="meal_plan" id="meal_plan" required>
+                            </div>
+                            <div class="form-group">
+                            <label for="phonenumber">Phone Number:</label>
+                            <input type="number" class="form-control" name="phonenumber" id="phonenumber" required>
+                            </div>    
+                            <br>
+                            <div class="form-group">
+                            <input type="submit" class="btn btn btn-primary" name="add" id="add" value="Add Student">
+                            <!-- <button type="submit" class="btn btn btn-primary" name="upload" id="upload" style="height:40px">Add Item</button> -->
+                            </div>
+                        </form>
+
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-bs-dismiss="modal" style="height:40px">Close</button>
+                        </div>
+                    </div>
+                    
+                    </div>
+              </div>
+
+                <?php
+                    include_once "PHP/config.php";
+                    
+                    
+                    if(isset($_POST['add']))
+                    {
+                        $id = mysqli_real_escape_string($conn,$_POST['s_id']);
+                        $fname = mysqli_real_escape_string($conn,$_POST['f_name']);
+                        $lname = mysqli_real_escape_string($conn,$_POST['l_name']);
+                        $password = mysqli_real_escape_string($conn,$_POST['password']);
+                        $cpassword = mysqli_real_escape_string($conn,$_POST['cpassword']);
+                        $email = mysqli_real_escape_string($conn,$_POST['email']);
+                        $mealplan = mysqli_real_escape_string($conn,$_POST['meal_plan']);
+                        $phonenumber = mysqli_real_escape_string($conn,$_POST['phonenumber']);               
+                         
+                        $passwordmd5 = md5($password);
+                        $cpasswordmd5 = md5($cpassword);            
+                        
+                        $insert = mysqli_query($conn,"INSERT INTO student
+                        (Student_ID,First_Name,Last_Name,Password,Confirm_Password,Email_Address,Meal_plan,Phone_Number) 
+                        VALUES ('$id','$fname','$lname','$passwordmd5','$cpasswordmd5','$email','$mealplan','$phonenumber')");
+                
+                        if(!$insert)
+                        {
+                          //echo '<script>alert("Connection error") </script>';
+                            echo mysqli_error($conn);
+                        }
+                        else
+                        {  
+                          if($passwordmd5 != $cpasswordmd5){
+                              echo '<script> alert("Passwords Do Not Match") </script>';
+                          }
+                          else{                    
+                              echo '<script> alert("Successful") </script>';
+                              //header('location:students.php');
+                          }  
+                        }
+                    
+                    }       
+                ?>
+<!-- ############################################################################################################## -->
+
+                  <!-- Edit Modal -->
+                  <div class="modal fade" id="editModal" role="dialog">
+                    <div class="modal-dialog">
+                    
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h4 class="modal-title">Edit Student</h4>
+                        <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                        <form  enctype='multipart/form-data' method="POST">
+                            <div class="form-group">
+                            <label for="id">Student ID:</label>
+                            <input type="text" class="form-control" name="s_id" id="s_id" value="<?php //echo $fetch['Student_ID']; ?>" required>
+                            </div>
+                            <div class="form-group">
+                            <label for="fname">First Name:</label>
+                            <input type="text" class="form-control" name="f_name" id="f_name" required>
+                            </div>
+                            <div class="form-group">
+                            <label for="lname">Last Name:</label>
+                            <input type="text" class="form-control" name="l_name" id="l_name" required>
+                            </div>
+                            <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="password" class="form-control" name="password" id="password" required>
+                            </div>
+                            <div class="form-group">
+                            <label for="cpassword">Confirm Password:</label>
+                            <input type="password" class="form-control" name="cpassword" id="cpassword" required>
+                            </div>
+                            <div class="form-group">
+                            <label for="email">Email Address:</label>
+                            <input type="text" class="form-control" name="email" id="email" required>
+                            </div>
+                            <div class="form-group">
+                            <label for="meal_plan">Meal Plan:</label>
+                            <input type="text" class="form-control" name="meal_plan" id="meal_plan" required>
+                            </div>
+                            <div class="form-group">
+                            <label for="phonenumber">Phone Number:</label>
+                            <input type="number" class="form-control" name="phonenumber" id="phonenumber" required>
+                            </div>    
+                            <br>
+                            <div class="form-group">
+                            <input type="submit" class="btn btn btn-primary" name="edit" id="edit" value="Save Changes">
+                            <!-- <button type="submit" class="btn btn btn-primary" name="upload" id="upload" style="height:40px">Add Item</button> -->
+                            </div>
+                        </form>
+
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-bs-dismiss="modal" style="height:40px">Close</button>
+                        </div>
+                    </div>
+                    
+                    </div>
+              </div>
+
+                  <?php
+                    // include_once "PHP/config.php";
+                    // $query = mysqli_query ($conn, "SELECT * FROM student WHERE Student_ID = '20s01abt007' ") or die ();
+								    // $fetch = mysqli_fetch_array ($query);
+                    
+                      
+                  ?>
+
               <!--/ Bordered Table -->
 
               <hr class="my-5" />
@@ -413,6 +579,7 @@
     <!-- / Layout wrapper -->
 
     <!-- Core JS -->
+    
     <!-- build:js assets/vendor/js/core.js -->
     <script src="../assets/vendor/libs/jquery/jquery.js"></script>
     <script src="../assets/vendor/libs/popper/popper.js"></script>

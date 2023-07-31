@@ -1,3 +1,8 @@
+<?php
+	include "PHP/session.php";
+    include "PHP/config.php";	
+?>
+
 <!doctype html>
 <html lang="zxx">
 
@@ -7,7 +12,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <title>Checkout Page</title>
+  <title>Tracking Page</title>
   
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -90,8 +95,8 @@
                                     Services
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-                                    <a class="dropdown-item" href="tracking.html"> Tracking</a>
-                                    <a class="dropdown-item" href="checkout.html"> Checkout</a>
+                                    <a class="dropdown-item" href="tracking.php"> Tracking</a>
+                                    <!-- <a class="dropdown-item" href="checkout.html"> Checkout</a> -->
                                     <a class="dropdown-item" href="confirmation.html"> Confirmation</a>
                                 </div>
                             </li>
@@ -104,34 +109,103 @@
                         </ul>
                     </div>
                     <div class="hearer_icon d-flex">
-                        
-                        <a href="signin.php" class="btn_3">
-                            Log Out
-                        </a>
-                          
-                            <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <div class="single_product">
-
-                                </div>
-                            </div> -->
+                            <?php
+                               if (isset($_SESSION['Student_ID'])) {
+                                $id = $_SESSION['Student_ID'];
                             
+                                $query = mysqli_query($conn, "SELECT * FROM student WHERE Student_ID='$id'") or die("Select Error");
+                                $fetch = mysqli_fetch_array($query);
+                            
+                                // Rest of the code that uses $fetch array
+                                } else {
+                                    // Handle the case when Student_ID is not set in the session
+                                    echo "Student ID not found in the session.";
+                                }
+                            ?>
+
+                            
+                                    <ul>
+                                    <!-- <a href="signin.php" class="btn_3"> -->
+                                    <button type="button" class="btn_3" style="height:40px" data-toggle="modal" data-target="#myProfile">
+                                        My Profile
+                                    </button>
+                                        <!-- <li>Welcome:<a href="#profile" href  data-toggle="modal"><i class="icon-user icon-white"></i><?php //echo $fetch['First_Name']; ?>&nbsp;<?php //echo $fetch['Last_Name'];?></a></li> -->
+                                    </ul>
+                                    
+                                    
+                            
+                              
+                                <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <div class="single_product">
+    
+                                    </div>
+                                </div> -->
+                                
+                            </div>
                         </div>
-                    </div>
-                </nav>
+                    </nav>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="search_input" id="search_input_box">
-        <div class="container ">
-            <form class="d-flex justify-content-between search-inner">
-                <input type="text" class="form-control" id="search_input" placeholder="Search Here">
-                <button type="submit" class="btn"></button>
-                <span class="ti-close" id="close_search" title="Close Search"></span>
-            </form>
-        </div>
-    </div>
-</header>
-  <!-- Header part end-->
+        <!-- <div class="search_input" id="search_input_box">
+            <div class="container ">
+                <form class="d-flex justify-content-between search-inner">
+                    <input type="text" class="form-control" id="search_input" placeholder="Search Here">
+                    <button type="submit" class="btn"></button>
+                    <span class="ti-close" id="close_search" title="Close Search"></span>
+                </form>
+            </div>
+        </div> -->
+                                  
+    </header>
+                <!-- Modal -->
+                <div class="modal fade" id="myProfile" role="dialog">
+                    <div class="modal-dialog">
+                    
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h4 class="modal-title">My Profile</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <?php
+                                $id = $_SESSION['Student_ID'];
+                            
+                                $query = mysqli_query($conn, "SELECT * FROM student WHERE Student_ID='$id'") or die("Select Error");
+                                $fetch = mysqli_fetch_array($query);
+                            ?>
+
+                        <form  enctype='multipart/form-data' method="POST">
+                            <center>
+							<table>
+                                <tr>
+									<td class="profile">Student ID:</td><td class="profile">&nbsp;<?php echo $fetch['Student_ID'];?></td>
+								</tr>
+								<tr>
+									<td class="profile">Name:</td><td class="profile">&nbsp;<?php echo $fetch['First_Name'];?>&nbsp;<?php echo $fetch['Last_Name'];?></td>
+								</tr>
+								<tr>
+									<td class="profile">Email Address:</td><td class="profile">&nbsp;<?php echo $fetch['Email_Address'];?></td>
+								</tr>								
+								<tr>
+									<td class="profile">Phone Number:</td><td class="profile">&nbsp;<?php echo $fetch['Phone_Number'];?></td>
+								</tr>
+							</table>
+						</center>
+
+                        </div>
+                        <div class="modal-footer">
+                        <a href="account.php?id=<?php echo $fetch['Student_ID']; ?>"><input type="button" class="btn btn-success" name="edit" value="Edit Account"></a>
+                        <a href="signin.php"><input type="button" class="btn btn-danger" name="" value="Log Out"></a>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" style="height:40px">Close</button>
+                        </div>
+                    </div>
+                    
+                    </div>
+                </div>
+
+    <!-- Header part end-->
 
   <!--================Home Banner Area =================-->
   <!-- breadcrumb start-->
@@ -267,41 +341,52 @@
               </div>
             </form>
           </div> -->
-          <div class="col-lg-8" style="width:800px; margin:0 auto;">
+          <!-- <div class="col-lg-8" style="width:800px; margin:0 auto;"> -->
+          <div class="col-lg-12">  
             <div class="order_box">
               <h2>Your Order</h2>
-              <ul class="list">
-                <li>
-                  <a href="#">Product
-                    <span>Total</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">Fresh Blackberry
-                    <span class="middle">x 02</span>
-                    <span class="last">$720.00</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">Fresh Tomatoes
-                    <span class="middle">x 02</span>
-                    <span class="last">$720.00</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">Fresh Brocoli
-                    <span class="middle">x 02</span>
-                    <span class="last">$720.00</span>
-                  </a>
-                </li>
-              </ul>
-              <ul class="list list_2">
-                <li>
-                  <a href="#">Total
-                    <span>$2210.00</span>
-                  </a>
-                </li>
-              </ul>
+              <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>Name</th>
+                          <th>Quantity</th>
+                          <th>Price</th>
+                          <th>Code</th>
+                          <th>Payment Status</th>
+                          <th>Ordered On</th>
+                          
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php          
+                            include_once "PHP/config.php";
+                            $sql="SELECT * from orders";
+                            $result=$conn-> query($sql);
+                            $count=1;
+                            if ($result-> num_rows > 0){
+                            while ($row=$result-> fetch_assoc()) {
+           
+                        ?>
+                        <tr>
+                          <td><?=$row["Order_ID"]?></td>
+                          <td><?=$row["Name"]?></td>
+                          <td><?=$row["Quantity"]?></td>
+                          <td><?=$row["Price"]?></td>
+                          <td><?=$row["Code"]?></td>
+                          <td><?=$row["Order_date"]?></td>
+    
+                        <?php
+                              $count=$count+1;
+                              
+                          }
+                          }
+                        ?>
+                        </tr>
+                        
+                         
+                      </tbody>
+                    </table>
               <!-- <div class="payment_item">          
               </div>
               <div class="payment_item active">
@@ -317,22 +402,22 @@
                 </p>
               </div> -->
               <br>
-              <h6>Select Payment Mode</h6>
+              <!-- <h6>Select Payment Mode</h6>
                     <div class="form-group p_star">
                       <select class="country_select">
                         <option value="1">Cash On Delivery</option>
                         <option value="2">M-Pesa</option>
                         <option value="3">Meal Plan</option>
                       </select>
-                    </div>
+                    </div> -->
               <!-- <div class="creat_account">
                 <input type="checkbox" id="f-option4" name="selector" />
                 <label for="f-option4">I’ve read and accept the </label>
                 <a href="#">terms & conditions*</a>
               </div> -->
-              <div class="col-md-6" style="width:800px; margin:0 auto;">
+              <!-- <div class="col-md-6" style="width:800px; margin:0 auto;">
                     <a class="btn_3" href="#">Finish Order</a>
-              </div>
+              </div> -->
               
             </div>
           </div>
@@ -341,6 +426,43 @@
     </div>
   </section>
   <!--================End Checkout Area =================-->
+
+  
+  <!--================Tracking Box Area =================-->
+  <section class="tracking_box_area padding_top">
+    <div class="container">
+      <div class="row align-items-center">
+        <!-- <div class="col-lg-6">
+              <div class="reacking_box_text text-center h-100">
+                <h2>New to our Shop?</h2>
+                <p>There are advances being made in science and technology
+                  everyday, and a good example of this is the</p>
+                  <a href="#" class="btn_2">Create an Account</a>
+              </div>
+            </div> -->
+        <div class="col-lg-12">
+          <div class="tracking_box_inner">
+            <p>To track your order please enter your Order ID in the box below and press the "Track" button. </p>
+            <!-- <p>This was given to you on your receipt and in the confirmation email you should have received.</p> -->
+            <form class="row tracking_form" action="#" method="post" novalidate="novalidate">
+              <div class="col-md-12 form-group">
+                <input type="text" class="form-control" id="order" name="order" placeholder="Order ID">
+              </div>
+              <!-- <div class="col-md-12 form-group">
+                <input type="email" class="form-control" id="email" name="email" placeholder="Billing Email Address">
+              </div> -->
+              <div class="col-md-12 form-group">
+                <button type="submit" value="submit" class="btn_3">Track Order</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+  <!--================End Tracking Box Area =================-->
 
   <!--::footer_part start::-->
   <footer class="footer_part">
